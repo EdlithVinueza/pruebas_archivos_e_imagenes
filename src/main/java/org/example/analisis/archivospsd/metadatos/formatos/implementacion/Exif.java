@@ -1,0 +1,48 @@
+package org.example.analisis.archivospsd.metadatos.formatos.implementacion;
+
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
+import org.example.analisis.archivospsd.metadatos.formatos.interfaz.IMetadataExtractor;
+import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD.MetadatosPSDBuilder;
+
+public class Exif implements IMetadataExtractor {
+
+    @Override
+    public void extract(Metadata metadata, MetadatosPSDBuilder builder) {
+        ExifIFD0Directory ifd0 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+        if (ifd0 != null) {
+            if (builder == null) {
+                return;
+            }
+            String software = ifd0.getString(ExifIFD0Directory.TAG_SOFTWARE);
+            String autor = ifd0.getString(ExifIFD0Directory.TAG_ARTIST);
+
+            if (software != null && !software.isBlank()) {
+                builder.software(software);
+            }
+            if (autor != null && !autor.isBlank()) {
+                builder.autor(autor);
+            }
+        }
+
+        ExifSubIFDDirectory subIfd = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+        if (subIfd != null) {
+            String fecha = primerValorNoVacio(
+                    subIfd.getString(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL),
+                    subIfd.getString(ExifSubIFDDirectory.TAG_DATETIME_DIGITIZED)
+            );
+
+            if (fecha != null && !fecha.isBlank()) {
+                builder.fechaCreacion(fecha);
+            }
+        }
+    }
+
+    private static String primerValorNoVacio(String primero, String segundo) {
+        if (primero != null && !primero.isBlank()) {
+            return primero;
+        }
+        return segundo;
+    }
+}
