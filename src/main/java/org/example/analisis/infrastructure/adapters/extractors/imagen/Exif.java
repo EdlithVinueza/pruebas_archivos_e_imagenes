@@ -1,0 +1,21 @@
+package org.example.analisis.infrastructure.adapters.extractors.imagen;
+
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+import org.example.analisis.core.ports.MetadataExtractor;
+import org.example.analisis.core.model.imagen.MetadatosImagen;
+
+public class Exif implements MetadataExtractor<MetadatosImagen.MetadatosImagenBuilder> {
+    @Override
+    public void extraer(Metadata metadata, MetadatosImagen.MetadatosImagenBuilder builder) {
+        ExifIFD0Directory ifd0 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+
+        if (ifd0 != null) {
+            Long res = ifd0.getLongObject(ExifIFD0Directory.TAG_X_RESOLUTION);
+            if (res != null) {
+                builder.pixelesPorUnidadX(res);
+                builder.unidadFisica("Inches");
+            }
+        }
+    }
+}

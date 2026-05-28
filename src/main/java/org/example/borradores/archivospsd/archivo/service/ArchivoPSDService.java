@@ -1,10 +1,10 @@
-package org.example.analisis.archivospsd.archivo.service;
+package org.example.borradores.archivospsd.archivo.service;
 
-import org.example.analisis.archivospsd.archivo.modelo.ArchivoPSD;
-import org.example.analisis.archivospsd.estructura.extractor.ExtractorCapasPSD;
-import org.example.analisis.archivospsd.estructura.modelo.CapaPSD;
-import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD;
-import org.example.analisis.archivospsd.metadatos.servicio.MetadatosPSDService;
+import org.example.borradores.archivospsd.archivo.modelo.ArchivoPSD;
+import org.example.borradores.archivospsd.estructura.extractor.ExtractorCapasPSD;
+import org.example.borradores.archivospsd.estructura.modelo.CapaPSD;
+import org.example.borradores.archivospsd.metadatos.modelo.MetadatosPSD;
+import org.example.borradores.archivospsd.metadatos.servicio.MetadatosPSDService;
 
 import java.io.File;
 import java.util.List;

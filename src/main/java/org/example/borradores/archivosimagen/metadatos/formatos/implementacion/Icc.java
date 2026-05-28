@@ -1,8 +1,8 @@
-package org.example.analisis.archivosimagen.metadatos.formatos.implementacion;
+package org.example.borradores.archivosimagen.metadatos.formatos.implementacion;
 
 import com.drew.metadata.Metadata;
-import org.example.analisis.archivosimagen.metadatos.formatos.interfaz.MetadataExtractor;
-import org.example.analisis.archivosimagen.metadatos.modelo.MetadatosImagen;
+import org.example.borradores.archivosimagen.metadatos.formatos.interfaz.MetadataExtractor;
+import org.example.borradores.archivosimagen.metadatos.modelo.MetadatosImagen;
 
 public class Icc implements MetadataExtractor {
     @Override

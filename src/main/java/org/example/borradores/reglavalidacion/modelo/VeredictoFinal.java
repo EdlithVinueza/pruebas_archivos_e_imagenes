@@ -1,4 +1,4 @@
-package org.example.analisis.reglavalidacion.modelo;
+package org.example.borradores.reglavalidacion.modelo;
 
 
 import lombok.Getter;

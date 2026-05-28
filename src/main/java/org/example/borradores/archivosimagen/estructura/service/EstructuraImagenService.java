@@ -1,7 +1,7 @@
-package org.example.analisis.archivosimagen.estructura.service;
+package org.example.borradores.archivosimagen.estructura.service;
 
 
-import org.example.analisis.archivosimagen.estructura.modelo.EstructuraImagen;
+import org.example.borradores.archivosimagen.estructura.modelo.EstructuraImagen;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,8 +1,8 @@
-package org.example.analisis.archivosimagen.validacion.implementacionregla;
+package org.example.borradores.archivosimagen.validacion.implementacionregla;
 
-import org.example.analisis.archivosimagen.archivo.modelo.ArchivoImage;
-import org.example.analisis.reglavalidacion.interfaz.IReglaValidacion;
-import org.example.analisis.reglavalidacion.modelo.ResultadoValidacion;
+import org.example.borradores.archivosimagen.archivo.modelo.ArchivoImage;
+import org.example.borradores.reglavalidacion.interfaz.IReglaValidacion;
+import org.example.borradores.reglavalidacion.modelo.ResultadoValidacion;
 
 public class ReglaAnalisisOrigen implements IReglaValidacion<ArchivoImage> {
     @Override

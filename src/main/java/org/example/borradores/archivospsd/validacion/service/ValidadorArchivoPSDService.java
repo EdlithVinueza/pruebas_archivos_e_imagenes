@@ -1,9 +1,9 @@
-package org.example.analisis.archivospsd.validacion.service;
+package org.example.borradores.archivospsd.validacion.service;
 
-import org.example.analisis.archivospsd.archivo.modelo.ArchivoPSD;
-import org.example.analisis.reglavalidacion.interfaz.IReglaValidacion;
-import org.example.analisis.reglavalidacion.modelo.ResultadoValidacion;
-import org.example.analisis.reglavalidacion.modelo.VeredictoFinal;
+import org.example.borradores.archivospsd.archivo.modelo.ArchivoPSD;
+import org.example.borradores.reglavalidacion.interfaz.IReglaValidacion;
+import org.example.borradores.reglavalidacion.modelo.ResultadoValidacion;
+import org.example.borradores.reglavalidacion.modelo.VeredictoFinal;
 
 import java.util.ArrayList;
 import java.util.List;

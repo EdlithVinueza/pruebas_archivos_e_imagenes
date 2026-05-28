@@ -1,7 +1,7 @@
-package org.example.analisis.archivospsd.metadatos;
+package org.example.borradores.archivospsd.metadatos;
 
-import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD;
-import org.example.analisis.archivospsd.metadatos.servicio.MetadatosPSDService;
+import org.example.borradores.archivospsd.metadatos.modelo.MetadatosPSD;
+import org.example.borradores.archivospsd.metadatos.servicio.MetadatosPSDService;
 
 import java.io.File;
 

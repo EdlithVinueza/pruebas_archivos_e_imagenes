@@ -1,4 +1,4 @@
-package org.example.analisis.simulitud.algoritmos;
+package org.example.borradores.simulitud.algoritmos;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

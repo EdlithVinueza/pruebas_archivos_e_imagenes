@@ -1,6 +1,6 @@
-package org.example.analisis.archivospsd.estructura.extractor;
+package org.example.borradores.archivospsd.estructura.extractor;
 
-import org.example.analisis.archivospsd.estructura.modelo.CapaPSD;
+import org.example.borradores.archivospsd.estructura.modelo.CapaPSD;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

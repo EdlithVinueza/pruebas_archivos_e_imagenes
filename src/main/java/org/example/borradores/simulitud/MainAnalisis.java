@@ -1,6 +1,6 @@
-package org.example.analisis.simulitud;
+package org.example.borradores.simulitud;
 
-import org.example.analisis.simulitud.service.ServicioComparador;
+import org.example.borradores.simulitud.service.ServicioComparador;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

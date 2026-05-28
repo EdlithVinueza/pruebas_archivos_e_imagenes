@@ -1,7 +1,7 @@
-package org.example.analisis.archivosimagen.metadatos;
+package org.example.borradores.archivosimagen.metadatos;
 
-import org.example.analisis.archivosimagen.metadatos.servicio.MetadatosImagenService;
-import org.example.analisis.archivosimagen.metadatos.modelo.MetadatosImagen;
+import org.example.borradores.archivosimagen.metadatos.servicio.MetadatosImagenService;
+import org.example.borradores.archivosimagen.metadatos.modelo.MetadatosImagen;
 
 import java.io.File;
 

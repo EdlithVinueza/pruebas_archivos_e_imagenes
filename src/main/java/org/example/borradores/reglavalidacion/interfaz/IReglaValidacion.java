@@ -1,7 +1,6 @@
-package org.example.analisis.reglavalidacion.interfaz;
+package org.example.borradores.reglavalidacion.interfaz;
 
-import org.example.analisis.archivospsd.archivo.modelo.ArchivoPSD;
-import org.example.analisis.reglavalidacion.modelo.ResultadoValidacion;
+import org.example.borradores.reglavalidacion.modelo.ResultadoValidacion;
 
 public interface IReglaValidacion<T> {
     // T será ArchivoPSD, ArchivoImagen, etc.

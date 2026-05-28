@@ -1,9 +1,9 @@
-package org.example.analisis.archivosimagen.archivo.service;
+package org.example.borradores.archivosimagen.archivo.service;
 
 
-import org.example.analisis.archivosimagen.archivo.modelo.ArchivoImage;
-import org.example.analisis.archivosimagen.metadatos.servicio.MetadatosImagenService;
-import org.example.analisis.archivosimagen.estructura.service.EstructuraImagenService;
+import org.example.borradores.archivosimagen.archivo.modelo.ArchivoImage;
+import org.example.borradores.archivosimagen.metadatos.servicio.MetadatosImagenService;
+import org.example.borradores.archivosimagen.estructura.service.EstructuraImagenService;
 
 import java.io.File;
 

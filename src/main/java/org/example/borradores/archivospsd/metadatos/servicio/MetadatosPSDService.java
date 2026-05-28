@@ -1,4 +1,4 @@
-package org.example.analisis.archivospsd.metadatos.servicio;
+package org.example.borradores.archivospsd.metadatos.servicio;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
@@ -6,9 +6,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import org.example.analisis.archivospsd.metadatos.formatos.implementacion.*;
-import org.example.analisis.archivospsd.metadatos.formatos.interfaz.IMetadataExtractor;
-import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD;
+import org.example.borradores.archivospsd.metadatos.formatos.implementacion.*;
+import org.example.borradores.archivospsd.metadatos.formatos.interfaz.IMetadataExtractor;
+import org.example.borradores.archivospsd.metadatos.modelo.MetadatosPSD;
 public class MetadatosPSDService {
     private final List<IMetadataExtractor> extractors;
 

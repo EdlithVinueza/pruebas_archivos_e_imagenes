@@ -1,7 +1,7 @@
-package org.example.analisis.archivospsd.metadatos.formatos.implementacion;
+package org.example.borradores.archivospsd.metadatos.formatos.implementacion;
 
-import org.example.analisis.archivospsd.metadatos.formatos.interfaz.IMetadataExtractor;
-import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD.MetadatosPSDBuilder;
+import org.example.borradores.archivospsd.metadatos.formatos.interfaz.IMetadataExtractor;
+import org.example.borradores.archivospsd.metadatos.modelo.MetadatosPSD.MetadatosPSDBuilder;
 
 import com.drew.metadata.Metadata;
 import com.drew.metadata.icc.IccDirectory;

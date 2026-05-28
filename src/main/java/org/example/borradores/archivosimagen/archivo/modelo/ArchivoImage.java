@@ -1,8 +1,8 @@
-package org.example.analisis.archivosimagen.archivo.modelo;
+package org.example.borradores.archivosimagen.archivo.modelo;
 
 import lombok.*;
-import org.example.analisis.archivosimagen.estructura.modelo.EstructuraImagen;
-import org.example.analisis.archivosimagen.metadatos.modelo.MetadatosImagen;
+import org.example.borradores.archivosimagen.estructura.modelo.EstructuraImagen;
+import org.example.borradores.archivosimagen.metadatos.modelo.MetadatosImagen;
 @Data
 @Builder
 @NoArgsConstructor

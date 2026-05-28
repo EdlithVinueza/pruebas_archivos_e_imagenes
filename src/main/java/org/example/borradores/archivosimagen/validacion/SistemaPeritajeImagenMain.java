@@ -1,12 +1,12 @@
-package org.example.analisis.archivosimagen.validacion;
+package org.example.borradores.archivosimagen.validacion;
 
-import org.example.analisis.archivosimagen.archivo.modelo.ArchivoImage;
-import org.example.analisis.archivosimagen.archivo.service.ArchivoImagenService;
-import org.example.analisis.archivosimagen.validacion.implementacionregla.ReglaAnalisisOrigen;
-import org.example.analisis.archivosimagen.validacion.implementacionregla.ReglaCoherenciaDpi;
-import org.example.analisis.archivosimagen.validacion.implementacionregla.ReglaFirmaEstructural;
-import org.example.analisis.archivosimagen.validacion.service.ValidadorArchivoImagenService;
-import org.example.analisis.reglavalidacion.modelo.VeredictoFinal;
+import org.example.borradores.archivosimagen.archivo.modelo.ArchivoImage;
+import org.example.borradores.archivosimagen.archivo.service.ArchivoImagenService;
+import org.example.borradores.archivosimagen.validacion.implementacionregla.ReglaAnalisisOrigen;
+import org.example.borradores.archivosimagen.validacion.implementacionregla.ReglaCoherenciaDpi;
+import org.example.borradores.archivosimagen.validacion.implementacionregla.ReglaFirmaEstructural;
+import org.example.borradores.archivosimagen.validacion.service.ValidadorArchivoImagenService;
+import org.example.borradores.reglavalidacion.modelo.VeredictoFinal;
 
 import java.io.File;
 

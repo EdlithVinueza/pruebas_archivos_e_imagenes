@@ -1,4 +1,4 @@
-package org.example.analisis.archivosimagen.estructura.service;
+package org.example.borradores.archivosimagen.estructura.service;
 import java.io.*;
 public class  ResolucionFisica {
 

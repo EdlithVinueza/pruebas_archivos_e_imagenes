@@ -1,4 +1,4 @@
-package org.example.analisis.archivospsd.estructura.modelo;
+package org.example.borradores.archivospsd.estructura.modelo;
 
 import lombok.Builder;
 import lombok.Data;

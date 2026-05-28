@@ -1,8 +1,8 @@
-package org.example.analisis.simulitud.service;
+package org.example.borradores.simulitud.service;
 
-import org.example.analisis.simulitud.algoritmos.CalculadorMSE;
-import org.example.analisis.simulitud.algoritmos.CalculadorPHash;
-import org.example.analisis.simulitud.algoritmos.CalculadorPSNR;
+import org.example.borradores.simulitud.algoritmos.CalculadorMSE;
+import org.example.borradores.simulitud.algoritmos.CalculadorPHash;
+import org.example.borradores.simulitud.algoritmos.CalculadorPSNR;
 
 import java.awt.image.BufferedImage;
 

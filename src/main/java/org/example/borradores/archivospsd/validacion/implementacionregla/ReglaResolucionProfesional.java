@@ -1,8 +1,8 @@
-package org.example.analisis.archivospsd.validacion.implementacionregla;
+package org.example.borradores.archivospsd.validacion.implementacionregla;
 
-import org.example.analisis.archivospsd.archivo.modelo.ArchivoPSD;
-import org.example.analisis.reglavalidacion.interfaz.IReglaValidacion;
-import org.example.analisis.reglavalidacion.modelo.ResultadoValidacion;
+import org.example.borradores.archivospsd.archivo.modelo.ArchivoPSD;
+import org.example.borradores.reglavalidacion.interfaz.IReglaValidacion;
+import org.example.borradores.reglavalidacion.modelo.ResultadoValidacion;
 
 public class ReglaResolucionProfesional implements IReglaValidacion<ArchivoPSD>  {
     @Override

@@ -1,4 +1,4 @@
-package org.example.analisis.archivosimagen.estructura.modelo;
+package org.example.borradores.archivosimagen.estructura.modelo;
 
 import lombok.*;
 

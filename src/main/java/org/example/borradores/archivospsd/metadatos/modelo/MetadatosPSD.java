@@ -1,4 +1,4 @@
-package org.example.analisis.archivospsd.metadatos.modelo;
+package org.example.borradores.archivospsd.metadatos.modelo;
 
 import lombok.*;
 import java.util.regex.Matcher;

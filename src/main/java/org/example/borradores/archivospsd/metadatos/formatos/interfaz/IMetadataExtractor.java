@@ -1,6 +1,6 @@
-package org.example.analisis.archivospsd.metadatos.formatos.interfaz;
+package org.example.borradores.archivospsd.metadatos.formatos.interfaz;
 
-import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD;
+import org.example.borradores.archivospsd.metadatos.modelo.MetadatosPSD;
 
 import com.drew.metadata.Metadata;
 

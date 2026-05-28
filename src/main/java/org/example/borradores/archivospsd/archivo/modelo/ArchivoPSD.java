@@ -1,8 +1,8 @@
-package org.example.analisis.archivospsd.archivo.modelo;
+package org.example.borradores.archivospsd.archivo.modelo;
 
 import lombok.*;
-import org.example.analisis.archivospsd.estructura.modelo.CapaPSD;
-import org.example.analisis.archivospsd.metadatos.modelo.MetadatosPSD;
+import org.example.borradores.archivospsd.estructura.modelo.CapaPSD;
+import org.example.borradores.archivospsd.metadatos.modelo.MetadatosPSD;
 
 import java.util.List;
 

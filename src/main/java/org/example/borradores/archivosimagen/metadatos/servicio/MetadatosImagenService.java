@@ -1,10 +1,10 @@
-package org.example.analisis.archivosimagen.metadatos.servicio;
+package org.example.borradores.archivosimagen.metadatos.servicio;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
-import org.example.analisis.archivosimagen.metadatos.formatos.implementacion.*;
-import org.example.analisis.archivosimagen.metadatos.formatos.interfaz.MetadataExtractor;
-import org.example.analisis.archivosimagen.metadatos.modelo.MetadatosImagen;
+import org.example.borradores.archivosimagen.metadatos.formatos.implementacion.*;
+import org.example.borradores.archivosimagen.metadatos.formatos.interfaz.MetadataExtractor;
+import org.example.borradores.archivosimagen.metadatos.modelo.MetadatosImagen;
 
 import java.io.File;
 import java.util.Arrays;

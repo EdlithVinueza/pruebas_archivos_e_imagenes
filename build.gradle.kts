@@ -27,7 +27,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.example.pruebas.images.ExifTest")
+    mainClass.set("org.example.Main")
 }
 
 tasks.test {

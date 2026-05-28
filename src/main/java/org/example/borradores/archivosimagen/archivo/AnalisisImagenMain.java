@@ -1,8 +1,8 @@
-package org.example.analisis.archivosimagen.archivo;
+package org.example.borradores.archivosimagen.archivo;
 
 
-import org.example.analisis.archivosimagen.archivo.modelo.ArchivoImage;
-import org.example.analisis.archivosimagen.archivo.service.ArchivoImagenService;
+import org.example.borradores.archivosimagen.archivo.modelo.ArchivoImage;
+import org.example.borradores.archivosimagen.archivo.service.ArchivoImagenService;
 
 import java.io.File;
 

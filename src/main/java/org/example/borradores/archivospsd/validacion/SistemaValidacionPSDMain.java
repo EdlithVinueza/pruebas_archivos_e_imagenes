@@ -1,13 +1,13 @@
-package org.example.analisis.archivospsd.validacion;
+package org.example.borradores.archivospsd.validacion;
 
-import org.example.analisis.archivospsd.archivo.modelo.ArchivoPSD;
-import org.example.analisis.archivospsd.archivo.service.ArchivoPSDService;
-import org.example.analisis.archivospsd.validacion.implementacionregla.ReglaComplejidadDiseno;
-import org.example.analisis.archivospsd.validacion.implementacionregla.ReglaFormatoPsd;
-import org.example.analisis.archivospsd.validacion.implementacionregla.ReglaImagenPegada;
-import org.example.analisis.archivospsd.validacion.implementacionregla.ReglaResolucionProfesional;
-import org.example.analisis.archivospsd.validacion.service.ValidadorArchivoPSDService;
-import org.example.analisis.reglavalidacion.modelo.VeredictoFinal;
+import org.example.borradores.archivospsd.archivo.modelo.ArchivoPSD;
+import org.example.borradores.archivospsd.archivo.service.ArchivoPSDService;
+import org.example.borradores.archivospsd.validacion.implementacionregla.ReglaComplejidadDiseno;
+import org.example.borradores.archivospsd.validacion.implementacionregla.ReglaFormatoPsd;
+import org.example.borradores.archivospsd.validacion.implementacionregla.ReglaImagenPegada;
+import org.example.borradores.archivospsd.validacion.implementacionregla.ReglaResolucionProfesional;
+import org.example.borradores.archivospsd.validacion.service.ValidadorArchivoPSDService;
+import org.example.borradores.reglavalidacion.modelo.VeredictoFinal;
 
 import java.io.File;
 
