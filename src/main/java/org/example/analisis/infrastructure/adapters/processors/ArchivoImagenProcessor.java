@@ -1,13 +1,13 @@
 package org.example.analisis.infrastructure.adapters.processors;
 
-import org.example.analisis.core.ports.ArchivoProcessor;
+import org.example.analisis.core.ports.out.ArchivoProcessorPort;
 import org.example.analisis.core.model.imagen.ArchivoImagen;
 import org.example.analisis.core.model.imagen.MetadatosImagen;
 import org.example.analisis.core.model.imagen.EstructuraImagen;
 
 import java.io.File;
 
-public class ArchivoImagenProcessor implements ArchivoProcessor<ArchivoImagen> {
+public class ArchivoImagenProcessor implements ArchivoProcessorPort<ArchivoImagen> {
 
     private final MetadatosImagenService metadatosService;
     private final EstructuraImagenService estructuraService;

@@ -1,7 +1,7 @@
 package org.example.analisis.infrastructure.adapters.extractors.imagen;
 
 import com.drew.metadata.Metadata;
-import org.example.analisis.core.ports.MetadataExtractor;
+import org.example.analisis.infrastructure.adapters.extractors.MetadataExtractor;
 import org.example.analisis.core.model.imagen.MetadatosImagen;
 
 public class Png implements MetadataExtractor<MetadatosImagen.MetadatosImagenBuilder> {

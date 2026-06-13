@@ -4,7 +4,7 @@ import org.example.analisis.core.model.base.ArchivoBase;
 import org.example.analisis.core.model.imagen.ArchivoImagen;
 import org.example.analisis.core.model.psd.ArchivoPSD;
 import org.example.analisis.core.model.validacion.VeredictoFinal;
-import org.example.analisis.core.ports.ArchivoProcessor;
+import org.example.analisis.core.ports.out.ArchivoProcessorPort;
 import org.example.analisis.core.service.ArchivoProcessorFactory;
 import org.example.analisis.core.service.ValidadorGenericoService;
 import org.example.analisis.core.service.CalculadorPHash;
@@ -26,7 +26,7 @@ public class Main {
         System.out.println("=========================================================");
 
         // 1. Inicializar la fábrica de procesadores
-        List<ArchivoProcessor<? extends ArchivoBase>> procesadores = Arrays.asList(
+        List<ArchivoProcessorPort<? extends ArchivoBase>> procesadores = Arrays.asList(
                 new ArchivoImagenProcessor(),
                 new ArchivoPSDProcessor()
         );
@@ -69,7 +69,7 @@ public class Main {
         ArchivoPSD psd = null;
         VeredictoFinal veredictoPSD = null;
         try {
-            ArchivoProcessor<ArchivoPSD> processorPSD = (ArchivoProcessor<ArchivoPSD>) factory.getProcessor(archivoPSD);
+            ArchivoProcessorPort<ArchivoPSD> processorPSD = (ArchivoProcessorPort<ArchivoPSD>) factory.getProcessor(archivoPSD);
             psd = processorPSD.procesar(archivoPSD);
             veredictoPSD = validadorPSD.validar(psd);
 
@@ -91,7 +91,7 @@ public class Main {
         ArchivoImagen png = null;
         VeredictoFinal veredictoPNG = null;
         try {
-            ArchivoProcessor<ArchivoImagen> processorPNG = (ArchivoProcessor<ArchivoImagen>) factory.getProcessor(archivoPNG);
+            ArchivoProcessorPort<ArchivoImagen> processorPNG = (ArchivoProcessorPort<ArchivoImagen>) factory.getProcessor(archivoPNG);
             png = processorPNG.procesar(archivoPNG);
             veredictoPNG = validadorImagen.validar(png);
 

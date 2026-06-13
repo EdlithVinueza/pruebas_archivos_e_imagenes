@@ -1,6 +1,6 @@
 package org.example.analisis.infrastructure.adapters.processors;
 
-import org.example.analisis.core.ports.ArchivoProcessor;
+import org.example.analisis.core.ports.out.ArchivoProcessorPort;
 import org.example.analisis.core.model.psd.ArchivoPSD;
 import org.example.analisis.core.model.psd.MetadatosPSD;
 import org.example.analisis.core.model.psd.EstructuraCapaPSD;
@@ -8,7 +8,7 @@ import org.example.analisis.core.model.psd.EstructuraCapaPSD;
 import java.io.File;
 import java.util.List;
 
-public class ArchivoPSDProcessor implements ArchivoProcessor<ArchivoPSD> {
+public class ArchivoPSDProcessor implements ArchivoProcessorPort<ArchivoPSD> {
 
     private final MetadatosPSDService metadatosService;
 

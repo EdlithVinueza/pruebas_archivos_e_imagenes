@@ -2,7 +2,7 @@ package org.example.analisis.infrastructure.adapters.extractors.psd;
 
 import com.drew.metadata.Metadata;
 import com.drew.metadata.photoshop.PhotoshopDirectory;
-import org.example.analisis.core.ports.MetadataExtractor;
+import org.example.analisis.infrastructure.adapters.extractors.MetadataExtractor;
 import org.example.analisis.core.model.psd.MetadatosPSD;
 
 public class Photoshop implements MetadataExtractor<MetadatosPSD.MetadatosPSDBuilder> {

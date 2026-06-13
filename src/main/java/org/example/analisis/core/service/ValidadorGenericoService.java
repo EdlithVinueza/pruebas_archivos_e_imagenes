@@ -3,7 +3,7 @@ package org.example.analisis.core.service;
 import org.example.analisis.core.model.base.ArchivoBase;
 import org.example.analisis.core.model.validacion.ResultadoValidacion;
 import org.example.analisis.core.model.validacion.VeredictoFinal;
-import org.example.analisis.core.ports.IReglaValidacion;
+import org.example.analisis.core.rules.IReglaValidacion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class ValidadorGenericoService<T extends ArchivoBase> {
     public VeredictoFinal validar(T objeto) {
         VeredictoFinal veredicto = new VeredictoFinal();
 
-        System.out.println("\n🔍 Iniciando peritaje forense: " + objeto.getNombreArchivo());
+        System.out.println("\nIniciando peritaje forense: " + objeto.getNombreArchivo());
 
         for (IReglaValidacion<T> regla : reglas) {
             // 1. Ejecutar la validación individual
@@ -29,7 +29,7 @@ public class ValidadorGenericoService<T extends ArchivoBase> {
 
             // 3. Cortocircuito si tu veredicto marca rechazo
             if (veredicto.isEsRechazado()) {
-                System.err.println("🛑 CORTOCIRCUITO: Análisis abortado por regla crítica [" + resultado.getNombreRegla() + "]");
+                System.err.println(" CORTOCIRCUITO: Análisis abortado por regla crítica [" + resultado.getNombreRegla() + "]");
                 break;
             }
         }

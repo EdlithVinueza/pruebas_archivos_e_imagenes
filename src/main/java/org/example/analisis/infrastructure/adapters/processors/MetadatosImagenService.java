@@ -2,7 +2,7 @@ package org.example.analisis.infrastructure.adapters.processors;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
-import org.example.analisis.core.ports.MetadataExtractor;
+import org.example.analisis.infrastructure.adapters.extractors.MetadataExtractor;
 import org.example.analisis.core.model.imagen.MetadatosImagen;
 import org.example.analisis.infrastructure.adapters.extractors.imagen.*;
 

@@ -1,19 +1,19 @@
 package org.example.analisis.core.service;
 
 import org.example.analisis.core.model.base.ArchivoBase;
-import org.example.analisis.core.ports.ArchivoProcessor;
+import org.example.analisis.core.ports.out.ArchivoProcessorPort;
 
 import java.io.File;
 import java.util.List;
 
 public class ArchivoProcessorFactory {
-    private final List<ArchivoProcessor<? extends ArchivoBase>> processors;
+    private final List<ArchivoProcessorPort<? extends ArchivoBase>> processors;
 
-    public ArchivoProcessorFactory(List<ArchivoProcessor<? extends ArchivoBase>> processors) {
+    public ArchivoProcessorFactory(List<ArchivoProcessorPort<? extends ArchivoBase>> processors) {
         this.processors = processors;
     }
 
-    public ArchivoProcessor<? extends ArchivoBase> getProcessor(File file) {
+    public ArchivoProcessorPort<? extends ArchivoBase> getProcessor(File file) {
         if (file == null || !file.exists()) {
             throw new IllegalArgumentException("El archivo es nulo o no existe.");
         }

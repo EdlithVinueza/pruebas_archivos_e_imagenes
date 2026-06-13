@@ -1,6 +1,6 @@
 package org.example.analisis.core.rules.imagen;
 
-import org.example.analisis.core.ports.IReglaValidacion;
+import org.example.analisis.core.rules.IReglaValidacion;
 import org.example.analisis.core.model.imagen.ArchivoImagen;
 import org.example.analisis.core.model.validacion.ResultadoValidacion;
 

@@ -2,7 +2,7 @@ package org.example.analisis.infrastructure.adapters.extractors.psd;
 
 import com.drew.metadata.Metadata;
 import com.drew.metadata.icc.IccDirectory;
-import org.example.analisis.core.ports.MetadataExtractor;
+import org.example.analisis.infrastructure.adapters.extractors.MetadataExtractor;
 import org.example.analisis.core.model.psd.MetadatosPSD;
 
 public class IccProfile implements MetadataExtractor<MetadatosPSD.MetadatosPSDBuilder> {

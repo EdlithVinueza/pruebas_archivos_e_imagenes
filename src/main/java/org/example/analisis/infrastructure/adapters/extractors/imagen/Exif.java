@@ -2,7 +2,7 @@ package org.example.analisis.infrastructure.adapters.extractors.imagen;
 
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifIFD0Directory;
-import org.example.analisis.core.ports.MetadataExtractor;
+import org.example.analisis.infrastructure.adapters.extractors.MetadataExtractor;
 import org.example.analisis.core.model.imagen.MetadatosImagen;
 
 public class Exif implements MetadataExtractor<MetadatosImagen.MetadatosImagenBuilder> {

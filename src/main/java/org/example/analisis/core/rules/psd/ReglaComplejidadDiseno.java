@@ -1,6 +1,6 @@
 package org.example.analisis.core.rules.psd;
 
-import org.example.analisis.core.ports.IReglaValidacion;
+import org.example.analisis.core.rules.IReglaValidacion;
 import org.example.analisis.core.model.psd.ArchivoPSD;
 import org.example.analisis.core.model.validacion.ResultadoValidacion;
 import org.example.analisis.core.model.psd.EstructuraCapaPSD;
