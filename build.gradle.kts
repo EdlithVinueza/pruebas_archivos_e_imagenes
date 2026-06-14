@@ -21,6 +21,21 @@ dependencies {
     implementation("com.twelvemonkeys.common:common-io:3.11.0")
     implementation("com.twelvemonkeys.common:common-image:3.11.0")
 
+    // BouncyCastle para Criptografía P12 y ECDSA
+    implementation("org.bouncycastle:bcprov-jdk18on:1.78.1")
+    implementation("org.bouncycastle:bcpkix-jdk18on:1.78.1")
+
+    // Jackson para JSON-LD / Serialización
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
+
+    // iText para Generación de PDF/A-3 Forense y HTML2PDF
+    implementation("com.itextpdf:itext7-core:7.2.5")
+    implementation("com.itextpdf:html2pdf:4.0.5")
+
+    // ZXing para generar los Códigos QR de las Firmas
+    implementation("com.google.zxing:core:3.5.3")
+    implementation("com.google.zxing:javase:3.5.3")
+
     // Lombok: elimina boilerplate de getters, setters y builders
     compileOnly("org.projectlombok:lombok:1.18.46")
     annotationProcessor("org.projectlombok:lombok:1.18.46")

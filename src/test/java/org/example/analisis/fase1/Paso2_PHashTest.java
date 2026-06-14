@@ -1,4 +1,4 @@
-package org.example.analisis;
+package org.example.analisis.fase1;
 
 import org.example.analisis.core.service.CalculadorPHash;
 import org.example.analisis.infrastructure.adapters.processors.ImageLoader;
@@ -12,7 +12,7 @@ import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PHashTest {
+public class Paso2_PHashTest {
 
     private static final String BASE_PATH = "C:/Users/Edlith Vinueza/Documents/UCE 26-26/Tesis/Archivos de Prueba/";
     private CalculadorPHash calculadorPHash;

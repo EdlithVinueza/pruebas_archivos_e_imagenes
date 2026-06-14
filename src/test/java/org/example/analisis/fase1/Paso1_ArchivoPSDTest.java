@@ -1,4 +1,4 @@
-package org.example.analisis;
+package org.example.analisis.fase1;
 
 import org.example.analisis.core.model.base.ArchivoBase;
 import org.example.analisis.core.model.psd.ArchivoPSD;
@@ -19,7 +19,7 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ArchivoPSDTest {
+public class Paso1_ArchivoPSDTest {
 
     private static final String BASE_PATH = "C:/Users/Edlith Vinueza/Documents/UCE 26-26/Tesis/Archivos de Prueba/";
     private ArchivoProcessorFactory factory;
