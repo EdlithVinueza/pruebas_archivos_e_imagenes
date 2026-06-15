@@ -27,6 +27,9 @@ dependencies {
 
     // Jackson para JSON-LD / Serialización
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
+    
+    // Apache Commons Imaging para manipulación de metadatos (EXIF/XMP)
+    implementation("org.apache.commons:commons-imaging:1.0-alpha3")
 
     // iText para Generación de PDF/A-3 Forense y HTML2PDF
     implementation("com.itextpdf:itext7-core:7.2.5")

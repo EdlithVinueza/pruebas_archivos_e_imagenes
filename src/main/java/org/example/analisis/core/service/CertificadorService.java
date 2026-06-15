@@ -56,29 +56,67 @@ public class CertificadorService implements CertificarObraUseCase {
         long timestamp = selloTiempoPort.obtenerTimestamp(sha256);
 
         // FASE 4: Generación de Entregables Híbridos
-        String certId = UUID.randomUUID().toString();
+        String certId = "VA-2026-UCE-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         
-        PayloadForense payload = new PayloadForense(
-                certId,
-                "Artista Verificado", // Se extrae del P12
-                "Alias",              // Se extrae del sistema
-                pHash,
+        PayloadForense.Autor autor = new PayloadForense.Autor("Edlith Vinueza", "UCE-77765");
+        PayloadForense.Obra obra = new PayloadForense.Obra(
+                "Nombre de la Ilustracion",
+                "2026-06-14T12:59:43Z",
+                "FireAlpaca",
+                "Huion Inspiroy H610PRO v2",
+                "Uso de capas de opacidad múltiple"
+        );
+        PayloadForense.AnalisisForenseDigital analisis = new PayloadForense.AnalisisForenseDigital(
                 sha256,
-                firmaArtista,
-                firmaCA,
-                timestamp
+                pHash,
+                "Desconocido" // Se puede extraer luego de los metadatos reales
+        );
+        PayloadForense.DatosCertificado datosCert = new PayloadForense.DatosCertificado(
+                certId,
+                "VerisArt - Laboratorio de Certificación Pericial",
+                "Dirección de Control de Telecomunicaciones (ALCOTEL / SENADI)",
+                new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(new Date(timestamp)),
+                "VALIDO",
+                "RSA-2048",
+                "8f4a39b2-simulacion-raiz"
+        );
+        PayloadForense.FirmaDigital firma = new PayloadForense.FirmaDigital(
+                "SHA256withRSA",
+                firmaArtista
+        );
+
+        PayloadForense payload = new PayloadForense(
+                "1.1",
+                autor,
+                obra,
+                analisis,
+                datosCert,
+                firma
         );
         
-        String jsonPayload = payload.toString(); // En producción usar Jackson/Gson
+        String jsonPayload;
+        try {
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            jsonPayload = mapper.writeValueAsString(payload);
+        } catch (Exception e) {
+            throw new RuntimeException("Error serializando PayloadForense a JSON", e);
+        }
 
-        // Inyectar en Luminancia DCT (Esteganografía)
-        byte[] renderEsteganografico = esteganografiaPort.procesar(renderOriginal, jsonPayload);
+        // Aquí deberíamos llamar a ImageMetadataInjectorAdapter y PdfEofCertificateAdapter
+        // Por compatibilidad temporal con el puerto existente, simulamos el render
+        byte[] renderEsteganografico = renderOriginal; // Ya no alteramos píxeles
+        if (esteganografiaPort != null) {
+            // Si el puerto sigue existiendo, lo llamamos pero idealmente esto se inyecta con XMP/tEXt
+            // renderEsteganografico = esteganografiaPort.procesar(renderOriginal, jsonPayload);
+        }
 
-        // Generar Certificado PDF
+        // Generar Certificado PDF (Se usará el PdfEofCertificateAdapter en la inyección de dependencias)
         byte[] pdfBytes = generadorPdfPort.generarCertificado(payload);
 
         // Fusión Física (EOF)
-        byte[] archivoHibrido = esteganografiaPort.fusionarEOF(renderEsteganografico, pdfBytes);
+        byte[] archivoHibrido = new byte[renderEsteganografico.length + pdfBytes.length];
+        System.arraycopy(renderEsteganografico, 0, archivoHibrido, 0, renderEsteganografico.length);
+        System.arraycopy(pdfBytes, 0, archivoHibrido, renderEsteganografico.length, pdfBytes.length);
 
         // Construir Entidad Final
         Certificado certificado = new Certificado(certId);

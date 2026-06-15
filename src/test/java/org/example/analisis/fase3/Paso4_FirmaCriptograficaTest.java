@@ -66,11 +66,19 @@ public class Paso4_FirmaCriptograficaTest {
         String idForense = UUID.randomUUID().toString();
         String firmaAutorBase64 = adaptadorCripto.firmarDatos(idForense + hashSha256, keysAutor.privateKey);
 
-        payloadMock = new PayloadForense(
-                idForense, keysAutor.subject + " - C.C. 1712345678", "CyberArtist",
-                phashValue, hashSha256,
-                firmaAutorBase64, firmaAutorBase64, System.currentTimeMillis()
-        );
+        // TODO: En producción, los datos del Autor (nombre, id) deben ser extraídos del certificado .p12
+        // del artista durante la firma, en lugar de ser mockeados aquí.
+        PayloadForense.Autor autor = new PayloadForense.Autor(keysAutor.subject + " - C.C. 1712345678", "CyberArtist");
+        
+        PayloadForense.Obra obra = new PayloadForense.Obra("Titulo de Prueba", "2026-06-14T12:00:00Z", "FireAlpaca", "Huion", "Detalles");
+        PayloadForense.AnalisisForenseDigital analisis = new PayloadForense.AnalisisForenseDigital(hashSha256, phashValue, "800x600");
+        PayloadForense.DatosCertificado datosCert = new PayloadForense.DatosCertificado(idForense, "CA", "Auth", "2026-06-14", "VALIDO", "RSA", "HashRaiz");
+        
+        // TODO: En producción, el valor de la firma y el algoritmo deben obtenerse matemáticamente 
+        // firmando el hash SHA-256 usando la clave privada contenida en el .p12.
+        PayloadForense.FirmaDigital firma = new PayloadForense.FirmaDigital("SHA256withRSA", firmaAutorBase64);
+
+        payloadMock = new PayloadForense("1.1", autor, obra, analisis, datosCert, firma);
     }
 
     @Test
@@ -78,7 +86,8 @@ public class Paso4_FirmaCriptograficaTest {
         System.out.println("=== FASE 3 - PASO 4: Inyección de Firma (Esteganografía DCT) ===");
 
         // Ejecución: Convertimos el objeto Payload a un formato JSON de texto y lo inyectamos
-        String payloadJson = payloadMock.toString();
+        com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+        String payloadJson = mapper.writeValueAsString(payloadMock);
         byte[] imagenConStego = adaptadorEstego.procesar(imagenOriginal, payloadJson);
 
         // Verificaciones (Asserts)

@@ -13,14 +13,17 @@ public class NumerosMagicos {  // Firmas hexadecimales
         byte[] encabezado = new byte[8];
         try (FileInputStream fis = new FileInputStream(archivo)) {
             if (fis.read(encabezado) < 4) return "DESCONOCIDO";
-
-            if (compararBytes(encabezado, PSD_SIGNATURE, 4)) return "PSD";
-            if (compararBytes(encabezado, PNG_SIGNATURE, 8)) return "PNG";
-            if (compararBytes(encabezado, JPEG_SIGNATURE, 3)) return "JPEG";
-
+            return detectarFormatoReal(encabezado);
         } catch (IOException e) {
             return "ERROR_LECTURA";
         }
+    }
+
+    public static String detectarFormatoReal(byte[] datos) {
+        if (datos == null || datos.length < 4) return "DESCONOCIDO";
+        if (compararBytes(datos, PSD_SIGNATURE, 4)) return "PSD";
+        if (datos.length >= 8 && compararBytes(datos, PNG_SIGNATURE, 8)) return "PNG";
+        if (datos.length >= 3 && compararBytes(datos, JPEG_SIGNATURE, 3)) return "JPEG";
         return "OTRO";
     }
 

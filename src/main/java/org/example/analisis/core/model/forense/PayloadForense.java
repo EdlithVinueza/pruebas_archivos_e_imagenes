@@ -1,76 +1,112 @@
 package org.example.analisis.core.model.forense;
 
-/**
- * Representa el conjunto de evidencias periciales que se empaquetarán en
- * formato JSON
- * y se inyectarán de forma esteganográfica (DCT - Luminancia) y física (EOF) en
- * el archivo final.
- */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PayloadForense {
-    private String id;
-    private String aut; // Nombre Legal
-    private String art; // Nombre Artístico
-    private String ph; // Perceptual Hash
-    private String sha; // SHA-256 de la imagen final
-    private String sig_a; // Firma del autor (Base64)
-    private String sig_s; // Firma del sistema/CA (Base64)
-    private long ts; // Sello de tiempo RFC 3161
 
-    public PayloadForense(String id, String aut, String art, String ph, String sha, String sig_a, String sig_s,
-            long ts) {
-        this.id = id;
-        this.aut = aut;
-        this.art = art;
-        this.ph = ph;
-        this.sha = sha;
-        this.sig_a = sig_a;
-        this.sig_s = sig_s;
-        this.ts = ts;
+    @JsonProperty("metadata_version")
+    private String metadataVersion = "1.1";
+
+    @JsonProperty("autor")
+    private Autor autor;
+
+    @JsonProperty("obra")
+    private Obra obra;
+
+    @JsonProperty("analisis_forense_digital")
+    private AnalisisForenseDigital analisisForenseDigital;
+
+    @JsonProperty("datos_del_certificado")
+    private DatosCertificado datosDelCertificado;
+
+    @JsonProperty("firma_digital")
+    private FirmaDigital firmaDigital;
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Autor {
+        @JsonProperty("nombre")
+        private String nombre;
+
+        @JsonProperty("id_institucional")
+        private String idInstitucional;
     }
 
-    public String getId() {
-        return id;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Obra {
+        @JsonProperty("titulo")
+        private String titulo;
+
+        @JsonProperty("fecha_declarada_creacion")
+        private String fechaDeclaradaCreacion;
+
+        @JsonProperty("software_original")
+        private String softwareOriginal;
+
+        @JsonProperty("hardware_adicional")
+        private String hardwareAdicional;
+
+        @JsonProperty("detalles_tecnicos")
+        private String detallesTecnicos;
     }
 
-    public String getAut() {
-        return aut;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AnalisisForenseDigital {
+        @JsonProperty("sha256_criptografico")
+        private String sha256Criptografico;
+
+        @JsonProperty("phash_perceptual")
+        private String phashPerceptual;
+
+        @JsonProperty("dimensiones")
+        private String dimensiones;
     }
 
-    public String getArt() {
-        return art;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DatosCertificado {
+        @JsonProperty("id_certificado")
+        private String idCertificado;
+
+        @JsonProperty("entidad_emisora")
+        private String entidadEmisora;
+
+        @JsonProperty("autoridad_delegatoria")
+        private String autoridadDelegatoria;
+
+        @JsonProperty("fecha_emision")
+        private String fechaEmision;
+
+        @JsonProperty("estado_inicial")
+        private String estadoInicial;
+
+        @JsonProperty("algoritmo_llave")
+        private String algoritmoLlave;
+
+        @JsonProperty("hash_certificado_raiz")
+        private String hashCertificadoRaiz;
     }
 
-    public String getPh() {
-        return ph;
-    }
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class FirmaDigital {
+        @JsonProperty("algoritmo")
+        private String algoritmo;
 
-    public String getSha() {
-        return sha;
-    }
-
-    public String getSig_a() {
-        return sig_a;
-    }
-
-    public String getSig_s() {
-        return sig_s;
-    }
-
-    public long getTs() {
-        return ts;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "\"id\":\"" + id + "\"," +
-                "\"aut\":\"" + aut + "\"," +
-                "\"art\":\"" + art + "\"," +
-                "\"ph\":\"" + ph + "\"," +
-                "\"sha\":\"" + sha + "\"," +
-                "\"sig_a\":\"" + sig_a + "\"," +
-                "\"sig_s\":\"" + sig_s + "\"," +
-                "\"ts\":" + ts +
-                "}";
+        @JsonProperty("valor_firma")
+        private String valorFirma;
     }
 }
