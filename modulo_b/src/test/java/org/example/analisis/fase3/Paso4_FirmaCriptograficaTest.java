@@ -66,9 +66,11 @@ public class Paso4_FirmaCriptograficaTest {
         String idForense = UUID.randomUUID().toString();
         String firmaAutorBase64 = adaptadorCripto.firmarDatos(idForense + hashSha256, keysAutor.privateKey);
 
-        // TODO: En producción, los datos del Autor (nombre, id) deben ser extraídos del certificado .p12
-        // del artista durante la firma, en lugar de ser mockeados aquí.
-        PayloadForense.Autor autor = new PayloadForense.Autor(keysAutor.subject + " - C.C. 1712345678", "CyberArtist");
+        // Usamos los datos reales extraídos del certificado .p12 del artista
+        PayloadForense.Autor autor = new PayloadForense.Autor(
+                keysAutor.subject, 
+                keysAutor.serialNumber + " (" + keysAutor.ou + ")"
+        );
         
         PayloadForense.Obra obra = new PayloadForense.Obra("Titulo de Prueba", "2026-06-14T12:00:00Z", "FireAlpaca", "Huion", "Detalles");
         PayloadForense.AnalisisForenseDigital analisis = new PayloadForense.AnalisisForenseDigital(hashSha256, phashValue, "800x600");
@@ -96,7 +98,7 @@ public class Paso4_FirmaCriptograficaTest {
 
         // Intentamos verificar que el texto sobrevivió (simulando una extracción básica)
         String content = new String(imagenConStego, StandardCharsets.UTF_8);
-        assertTrue(content.contains("CyberArtist"), "La firma debe sobrevivir en los bytes de la imagen");
+        assertTrue(content.contains("Titulo de Prueba"), "La firma debe sobrevivir en los bytes de la imagen");
         System.out.println("Éxito: La firma ha sido incrustada en la imagen.");
     }
 }

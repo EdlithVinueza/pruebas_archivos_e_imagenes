@@ -4,7 +4,6 @@ import org.example.analisis.core.model.forense.PayloadForense;
 import org.example.analisis.core.service.CalculadorPHash;
 import org.example.analisis.infrastructure.adapters.outbound.AdaptadorCriptograficoBouncyCastle;
 import org.example.analisis.infrastructure.adapters.outbound.AdaptadorPdfIText;
-import org.example.analisis.infrastructure.adapters.outbound.AdaptadorEsteganografia;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,40 +17,36 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * FASE 4: INSERCIÓN FINAL (HARD BINDING)
+ * FASE 4: GENERACIÓN DEL CERTIFICADO PDF
  * 
- * Esta clase se encarga de probar el último paso del proceso forense: tomar el
- * certificado PDF (generado en el Paso 5) y adjuntarlo físicamente al final de 
- * los bytes de la imagen original (técnica EOF - End Of File).
- * Esto asegura que la imagen y su certificado viajen juntos de manera inseparable
- * (Hard Binding), permitiendo que cualquier perito pueda extraer el PDF y validar
- * las firmas digitales integradas.
+ * Esta clase se encarga de probar que el sistema puede tomar el Payload Forense
+ * (los datos del artista, la obra, los hashes y las firmas criptográficas) y
+ * renderizarlos visualmente en un documento PDF de alta calidad.
+ * El PDF incluye un Código QR nativo que contiene el Payload JSON, permitiendo
+ * que un perito escanee el documento impreso o digital para validar las firmas.
  */
-public class Paso6_InsercionFinalTest {
+public class Paso5_GeneracionPdfTest {
 
     private static final String BASE_PATH = "C:/Users/Edlith Vinueza/Documents/UCE 26-26/Tesis/Archivos de Prueba/";
     private static final String P12_PATH_AUTOR = "C:/Users/Edlith Vinueza/Documents/UCE 26-26/Tesis/pruebas-firmas-digitales/firma_edlith_test.p12";
     private static final String P12_PATH_CA = "C:/Users/Edlith Vinueza/Documents/UCE 26-26/Tesis/pruebas-firmas-digitales/firma_final_azure_test.p12";
 
-    private AdaptadorEsteganografia adaptadorEstego;
     private AdaptadorPdfIText adaptadorPdf;
     private AdaptadorCriptograficoBouncyCastle adaptadorCripto;
     private PayloadForense payloadMock;
-    private byte[] imagenOriginal;
 
     @BeforeEach
     void setUp() throws Exception {
-        adaptadorEstego = new AdaptadorEsteganografia();
         adaptadorPdf = new AdaptadorPdfIText();
         adaptadorCripto = new AdaptadorCriptograficoBouncyCastle();
-        
+
         // 1. Cargar imagen original
         Path imagePath = Paths.get(BASE_PATH + "imagenes/girasol-original.png");
-        imagenOriginal = Files.readAllBytes(imagePath);
+        byte[] imagenOriginal = Files.readAllBytes(imagePath);
 
         // 2. Extraer datos reales de la imagen (Hash SHA-256 y pHash)
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -61,13 +56,14 @@ public class Paso6_InsercionFinalTest {
             shaHex.append(String.format("%02x", b));
         }
         String hashSha256 = shaHex.toString();
-        
+
         CalculadorPHash calcPHash = new CalculadorPHash();
         String phashValue = calcPHash.generarHash(ImageIO.read(new ByteArrayInputStream(imagenOriginal)));
 
         // 3. Extraer llaves reales del P12 generado en el Módulo A
-        AdaptadorCriptograficoBouncyCastle.ValidatedKeyPair keysAutor = adaptadorCripto.extraerYValidarP12(P12_PATH_AUTOR, "Tesis2026!".toCharArray());
-        
+        AdaptadorCriptograficoBouncyCastle.ValidatedKeyPair keysAutor = adaptadorCripto
+                .extraerYValidarP12(P12_PATH_AUTOR, "Tesis2026!".toCharArray());
+
         // 4. Firmar datos reales (Usaremos el id + el hash para la firma)
         String idForense = UUID.randomUUID().toString();
         String firmaAutorBase64 = adaptadorCripto.firmarDatos(idForense + hashSha256, keysAutor.privateKey);
@@ -88,28 +84,24 @@ public class Paso6_InsercionFinalTest {
     }
 
     @Test
-    void debeInsertarCertificadoEnImagen() {
-        System.out.println("=== FASE 4 - PASO 6: Inserción Final del Certificado (EOF) ===");
-        
-        byte[] imagenConStego = adaptadorEstego.procesar(imagenOriginal, payloadMock.toString());
-        byte[] pdfBytes = adaptadorPdf.generarCertificado(payloadMock);
-        
-        byte[] archivoHibrido = adaptadorEstego.fusionarEOF(imagenConStego, pdfBytes);
+    void debeGenerarCertificadoPdfDesdeHtml() {
+        System.out.println("=== FASE 4 - PASO 5: Generación de Certificado PDF (HTML2PDF) ===");
 
-        assertNotNull(archivoHibrido);
-        
+        byte[] pdfBytes = adaptadorPdf.generarCertificado(payloadMock);
+
+        assertNotNull(pdfBytes);
+        assertTrue(pdfBytes.length > 1000, "El PDF debe haberse generado con la plantilla HTML");
+
         try {
-            File outputFile = new File("girasol-certificado-final.png");
+            File dir = new File("build/result_test");
+            if (!dir.exists()) dir.mkdirs();
+            File outputFile = new File(dir, "certificado-test.pdf");
             try (FileOutputStream fos = new FileOutputStream(outputFile)) {
-                fos.write(archivoHibrido);
+                fos.write(pdfBytes);
             }
-            System.out.println("Éxito: Archivo final guardado en " + outputFile.getAbsolutePath() + " para validación visual.");
+            System.out.println("Éxito: PDF guardado en " + outputFile.getAbsolutePath() + " para validación visual.");
         } catch (Exception e) {
             System.err.println("Error al guardar archivo: " + e.getMessage());
         }
-
-        byte[] pdfRecuperado = adaptadorEstego.extraerPdfDeEOF(archivoHibrido);
-        assertEquals(pdfBytes.length, pdfRecuperado.length, "El PDF se debe poder extraer intacto");
     }
 }
-

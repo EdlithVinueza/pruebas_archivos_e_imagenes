@@ -28,6 +28,8 @@ public class Paso3_ValidacionFirmaTest {
             
             System.out.println("====== RESULTADO DE VALIDACIÓN P12 ======");
             System.out.println("Sujeto (Autor): " + result.subject);
+            System.out.println("Identificación (SERIALNUMBER): " + result.serialNumber);
+            System.out.println("Pseudónimo (OU): " + result.ou);
             System.out.println("Emisor (CA): " + result.issuer);
             System.out.println("Algoritmo Llave Pública: " + result.publicKey.getAlgorithm());
             System.out.println("=========================================");

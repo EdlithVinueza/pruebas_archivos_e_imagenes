@@ -69,7 +69,9 @@ public class Paso7_InyeccionMetadataTest {
         System.arraycopy(pdfBytes, 0, archivoFinal, modificadoBytes.length, pdfBytes.length);
 
         // Guardamos el resultado para validación externa (ej. ver con ExifTool)
-        try (FileOutputStream fos = new FileOutputStream("girasol-certificado.jpg")) {
+        File dirJpg = new File("build/result_test");
+        if (!dirJpg.exists()) dirJpg.mkdirs();
+        try (FileOutputStream fos = new FileOutputStream(new File(dirJpg, "girasol-certificado.jpg"))) {
             fos.write(archivoFinal);
         }
 
@@ -98,7 +100,9 @@ public class Paso7_InyeccionMetadataTest {
         System.arraycopy(modificadoBytes, 0, archivoFinal, 0, modificadoBytes.length);
         System.arraycopy(pdfBytes, 0, archivoFinal, modificadoBytes.length, pdfBytes.length);
 
-        try (FileOutputStream fos = new FileOutputStream("girasol-certificado.png")) {
+        File dirPng = new File("build/result_test");
+        if (!dirPng.exists()) dirPng.mkdirs();
+        try (FileOutputStream fos = new FileOutputStream(new File(dirPng, "girasol-certificado.png"))) {
             fos.write(archivoFinal);
         }
 

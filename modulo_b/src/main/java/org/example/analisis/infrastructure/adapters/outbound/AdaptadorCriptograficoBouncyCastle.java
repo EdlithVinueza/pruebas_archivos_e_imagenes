@@ -51,19 +51,21 @@ public class AdaptadorCriptograficoBouncyCastle {
         String issuerFull = certificate.getIssuerX500Principal().getName();
         String subjectFull = certificate.getSubjectX500Principal().getName();
 
-        String issuerInfo = extractCN(issuerFull);
-        String subjectInfo = extractCN(subjectFull);
+        String issuerInfo = extractField(issuerFull, "CN=");
+        String subjectInfo = extractField(subjectFull, "CN=");
+        String serialNumberInfo = extractField(subjectFull, "SERIALNUMBER=");
+        String ouInfo = extractField(subjectFull, "OU=");
 
-        return new ValidatedKeyPair(privateKey, certificate.getPublicKey(), issuerInfo, subjectInfo);
+        return new ValidatedKeyPair(privateKey, certificate.getPublicKey(), issuerInfo, subjectInfo, serialNumberInfo, ouInfo);
     }
 
-    private String extractCN(String dn) {
+    private String extractField(String dn, String fieldPrefix) {
         for (String part : dn.split(",")) {
-            if (part.trim().startsWith("CN=")) {
-                return part.trim().substring(3);
+            if (part.trim().startsWith(fieldPrefix)) {
+                return part.trim().substring(fieldPrefix.length());
             }
         }
-        return dn;
+        return dn; // Retorna todo el DN si no encuentra el campo específico
     }
 
     // Clase interna para devolver ambos resultados
@@ -72,12 +74,16 @@ public class AdaptadorCriptograficoBouncyCastle {
         public final PublicKey publicKey;
         public final String issuer;
         public final String subject;
+        public final String serialNumber;
+        public final String ou;
 
-        public ValidatedKeyPair(PrivateKey privateKey, PublicKey publicKey, String issuer, String subject) {
+        public ValidatedKeyPair(PrivateKey privateKey, PublicKey publicKey, String issuer, String subject, String serialNumber, String ou) {
             this.privateKey = privateKey;
             this.publicKey = publicKey;
             this.issuer = issuer;
             this.subject = subject;
+            this.serialNumber = serialNumber;
+            this.ou = ou;
         }
     }
 

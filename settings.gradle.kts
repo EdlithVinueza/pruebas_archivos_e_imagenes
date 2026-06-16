@@ -1,1 +1,1 @@
-rootProject.name = "Pruebas_Imagenes"
+rootProject.name = "Analisis_Forense_y_Certificacion_de_Obra"
