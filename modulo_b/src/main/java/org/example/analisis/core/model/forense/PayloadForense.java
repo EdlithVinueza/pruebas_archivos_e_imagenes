@@ -35,8 +35,17 @@ public class PayloadForense {
         @JsonProperty("nombre")
         private String nombre;
 
+        @JsonProperty("seudonimo")
+        private String seudonimo;
+
         @JsonProperty("id_institucional")
         private String idInstitucional;
+        
+        public Autor(String nombre, String idInstitucional) {
+            this.nombre = nombre;
+            this.seudonimo = null;
+            this.idInstitucional = idInstitucional;
+        }
     }
 
     @Data

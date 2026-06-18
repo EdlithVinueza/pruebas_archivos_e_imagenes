@@ -49,14 +49,34 @@ public class AdaptadorCriptograficoBouncyCastle {
 
         // 2. Extraer datos importantes del certificado (Solo el Common Name)
         String issuerFull = certificate.getIssuerX500Principal().getName();
-        String subjectFull = certificate.getSubjectX500Principal().getName();
+        // Usamos BouncyCastle para que mapee correctamente los OID a strings (como
+        // SERIALNUMBER)
+        org.bouncycastle.asn1.x500.X500Name subjectDN = org.bouncycastle.asn1.x500.X500Name
+                .getInstance(certificate.getSubjectX500Principal().getEncoded());
+        String subjectFull = subjectDN.toString();
 
         String issuerInfo = extractField(issuerFull, "CN=");
+        if (issuerInfo.equals("No Especificado"))
+            issuerInfo = extractField(issuerFull, "O=");
+
         String subjectInfo = extractField(subjectFull, "CN=");
+
+        // Intentamos sacar la cédula (SERIALNUMBER) del Subject DN
         String serialNumberInfo = extractField(subjectFull, "SERIALNUMBER=");
+        if (serialNumberInfo.equals("No Especificado")) {
+            // Alternativa: A veces Java lo lee como OID
+            serialNumberInfo = extractField(subjectFull, "OID.2.5.4.5=");
+        }
+        if (serialNumberInfo.equals("No Especificado")) {
+            // Si no hay cédula en el DN, usamos el Serial Number real del certificado X.509
+            // en Hexadecimal
+            serialNumberInfo = certificate.getSerialNumber().toString(16).toUpperCase();
+        }
+
         String ouInfo = extractField(subjectFull, "OU=");
 
-        return new ValidatedKeyPair(privateKey, certificate.getPublicKey(), issuerInfo, subjectInfo, serialNumberInfo, ouInfo);
+        return new ValidatedKeyPair(privateKey, certificate.getPublicKey(), issuerInfo, subjectInfo, serialNumberInfo,
+                ouInfo);
     }
 
     private String extractField(String dn, String fieldPrefix) {
@@ -65,7 +85,7 @@ public class AdaptadorCriptograficoBouncyCastle {
                 return part.trim().substring(fieldPrefix.length());
             }
         }
-        return dn; // Retorna todo el DN si no encuentra el campo específico
+        return "No Especificado"; // Evita retornar todo el DN gigante
     }
 
     // Clase interna para devolver ambos resultados
@@ -77,7 +97,8 @@ public class AdaptadorCriptograficoBouncyCastle {
         public final String serialNumber;
         public final String ou;
 
-        public ValidatedKeyPair(PrivateKey privateKey, PublicKey publicKey, String issuer, String subject, String serialNumber, String ou) {
+        public ValidatedKeyPair(PrivateKey privateKey, PublicKey publicKey, String issuer, String subject,
+                String serialNumber, String ou) {
             this.privateKey = privateKey;
             this.publicKey = publicKey;
             this.issuer = issuer;

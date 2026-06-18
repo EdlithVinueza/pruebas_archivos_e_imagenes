@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -61,26 +62,40 @@ public class Paso5_GeneracionPdfTest {
         String phashValue = calcPHash.generarHash(ImageIO.read(new ByteArrayInputStream(imagenOriginal)));
 
         // 3. Extraer llaves reales del P12 generado en el Módulo A
-        AdaptadorCriptograficoBouncyCastle.ValidatedKeyPair keysAutor = adaptadorCripto
-                .extraerYValidarP12(P12_PATH_AUTOR, "Tesis2026!".toCharArray());
+        System.out.println("Extrayendo datos de los certificados P12...");
+        AdaptadorCriptograficoBouncyCastle.ValidatedKeyPair keysAutor = 
+                adaptadorCripto.extraerYValidarP12(P12_PATH_AUTOR, "Tesis2026!".toCharArray());
 
-        // 4. Firmar datos reales (Usaremos el id + el hash para la firma)
-        String idForense = UUID.randomUUID().toString();
-        String firmaAutorBase64 = adaptadorCripto.firmarDatos(idForense + hashSha256, keysAutor.privateKey);
-
-        // TODO: En producción, los datos del Autor (nombre, id) deben ser extraídos del certificado .p12
-        // del artista durante la firma, en lugar de ser mockeados aquí.
-        PayloadForense.Autor autor = new PayloadForense.Autor(keysAutor.subject + " - C.C. 1712345678", "CyberArtist");
+        payloadMock = new PayloadForense();
+        payloadMock.setMetadataVersion("1.1");
         
-        PayloadForense.Obra obra = new PayloadForense.Obra("Titulo de Prueba", "2026-06-14T12:00:00Z", "FireAlpaca", "Huion", "Detalles");
-        PayloadForense.AnalisisForenseDigital analisis = new PayloadForense.AnalisisForenseDigital(hashSha256, phashValue, "800x600");
-        PayloadForense.DatosCertificado datosCert = new PayloadForense.DatosCertificado(idForense, "CA", "Auth", "2026-06-14", "VALIDO", "RSA", "HashRaiz");
+        PayloadForense.DatosCertificado datosCertificado = new PayloadForense.DatosCertificado();
+        datosCertificado.setIdCertificado("CERT-2026-9941A");
+        datosCertificado.setFechaEmision(LocalDateTime.now().toString());
+        datosCertificado.setEstadoInicial("EMITIDO_VALIDO");
+        datosCertificado.setEntidadEmisora("UNIVERSIDAD CENTRAL DEL ECUADOR");
+        datosCertificado.setAutoridadDelegatoria("UNIDAD DE INVESTIGACIÓN");
+        payloadMock.setDatosDelCertificado(datosCertificado);
         
-        // TODO: En producción, el valor de la firma y el algoritmo deben obtenerse matemáticamente 
-        // firmando el hash SHA-256 usando la clave privada contenida en el .p12.
-        PayloadForense.FirmaDigital firma = new PayloadForense.FirmaDigital("SHA256withRSA", firmaAutorBase64);
+        PayloadForense.Autor autor = new PayloadForense.Autor();
+        autor.setNombre(keysAutor.subject);
+        autor.setSeudonimo("Edith Vinueza"); // Seudónimo de prueba
+        autor.setIdInstitucional(keysAutor.serialNumber);
+        payloadMock.setAutor(autor);
+        
+        PayloadForense.Obra obra = new PayloadForense.Obra();
+        obra.setTitulo("El Eco del Mañana");
+        obra.setSoftwareOriginal("Photoshop");
+        obra.setHardwareAdicional("Wacom");
+        payloadMock.setObra(obra);
+        
+        PayloadForense.AnalisisForenseDigital analisis = new PayloadForense.AnalisisForenseDigital();
+        analisis.setSha256Criptografico("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+        analisis.setPhashPerceptual("8f3c3c4f5a6b7d8e"); // Valor Hexadecimal simulado
+        payloadMock.setAnalisisForenseDigital(analisis);
 
-        payloadMock = new PayloadForense("1.1", autor, obra, analisis, datosCert, firma);
+        String firmaBase64 = adaptadorCripto.firmarDatos(datosCertificado.getIdCertificado() + analisis.getSha256Criptografico(), keysAutor.privateKey);
+        payloadMock.setFirmaDigital(new PayloadForense.FirmaDigital("SHA256withECDSA", firmaBase64));
     }
 
     @Test

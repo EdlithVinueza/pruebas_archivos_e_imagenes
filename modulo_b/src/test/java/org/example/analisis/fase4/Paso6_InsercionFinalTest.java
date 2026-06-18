@@ -99,7 +99,7 @@ public class Paso6_InsercionFinalTest {
         assertNotNull(archivoHibrido);
         
         try {
-            File dir = new File("build/result_test");
+            File dir = new File("build/resultados_test");
             if (!dir.exists()) dir.mkdirs();
             File outputFile = new File(dir, "girasol-certificado-final.png");
             try (FileOutputStream fos = new FileOutputStream(outputFile)) {

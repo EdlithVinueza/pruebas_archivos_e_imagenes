@@ -1,3 +1,51 @@
+# 1. Esteganografía Forense y Metadata no Destructiva
+
+## La Paradoja de la Esteganografía en Ciencias Forenses
+
+**¿Por qué NO inyectamos la información dentro de los píxeles (método LSB)?**
+
+La técnica esteganográfica tradicional más famosa es LSB (*Least Significant Bit*), que consiste en alterar sutilmente el valor de color de los píxeles menos significativos de una imagen para ocultar letras. Sin embargo, en un entorno de **Ciencia Forense Digital**, esta técnica está estrictamente prohibida. Alterar aunque sea un solo bit dentro de la matriz visual de los píxeles modificaría de manera irreversible el Hash original (SHA-256) de la obra. Es decir, al esconder la firma, estaríamos **destruyendo y adulterando la evidencia principal**.
+
+Por esta razón, la inyección debe ser 100% no destructiva, operando a nivel de la estructura binaria (metadata) externa a la trama visual.
+
+## Diagramas de Inyección no destructiva
+
+### 1. Inyección de JSON en PNG (Chunk `tEXt`)
+El formato PNG se compone de "Chunks" o pedazos de información. Insertamos un nuevo bloque `tEXt` personalizado justo antes del bloque final de cierre (`IEND`), sin tocar el bloque de píxeles (`IDAT`).
+
+```mermaid
+block-beta
+  columns 5
+  SIG["Firma (8 bytes)"] 
+  IHDR["IHDR (Dimensiones)"] 
+  IDAT["IDAT (Píxeles Intactos)"] 
+  TEXT["Chunk tEXt (Nuestro JSON)"]
+  IEND["IEND (Cierre)"]
+  
+  style TEXT fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+### 2. Inyección de JSON en JPEG (Segmento `APP11`)
+El formato JPEG se basa en segmentos identificados por marcadores hexadecimales. Creamos un segmento `APP11` (FF EB) reservado exclusivamente para la certificación forense, manteniéndolo separado del EXIF tradicional (`APP1`).
+
+```mermaid
+block-beta
+  columns 5
+  SOI["FF D8 (Inicio)"] 
+  APP0["APP0/JFIF"] 
+  APP11["APP11 (FF EB + JSON)"]
+  PIX["Datos de Píxeles Intactos"] 
+  EOI["FF D9 (Cierre)"]
+
+  style APP11 fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+## Algoritmo de Inyección en Metadata (`AdaptadorEsteganografia.java` Parte 1)
+
+El siguiente código muestra cómo se calculan las posiciones de bytes y se insertan los nuevos metadatos calculando los comprobantes de redundancia (como CRC32 para PNG) para no corromper la integridad del archivo.
+
+```java
+// Fragmentos de AdaptadorEsteganografia.java relacionados a Metadata
 package org.example.analisis.infrastructure.adapters.outbound;
 
 import org.example.analisis.core.ports.outbound.ServicioEsteganograficoPort;
@@ -12,8 +60,7 @@ import java.util.zip.CRC32;
 
 public class AdaptadorEsteganografia implements ServicioEsteganograficoPort {
 
-    // Marcador mágico para separar la imagen del PDF en la inyección EOF
-    public static final byte[] EOF_MAGIC_MARKER = "---FORENSIC-PDF-START---".getBytes(StandardCharsets.UTF_8);
+    // ... (Marcador mágico omitido para esta sección)
 
     @Override
     public byte[] procesar(byte[] renderOriginal, String jsonPayload) {
@@ -38,38 +85,38 @@ public class AdaptadorEsteganografia implements ServicioEsteganograficoPort {
 
     private byte[] inyectarMetadataPNG(byte[] imageBytes, String jsonPayload) {
         try {
-            // Estructura de chunk tEXt: Keyword + nulo + Texto
-            String keyword = "VerisArt";
+            // Estructura de chunk tEXt de PNG: Keyword + nulo + Texto
+            String keyword = "JSON-PAYLOAD";
             byte[] keywordBytes = keyword.getBytes(StandardCharsets.ISO_8859_1);
             byte[] textBytes = jsonPayload.getBytes(StandardCharsets.UTF_8);
             
             byte[] chunkData = new byte[keywordBytes.length + 1 + textBytes.length];
             System.arraycopy(keywordBytes, 0, chunkData, 0, keywordBytes.length);
-            chunkData[keywordBytes.length] = 0; // Separador nulo
+            chunkData[keywordBytes.length] = 0; // Separador nulo obligatorio
             System.arraycopy(textBytes, 0, chunkData, keywordBytes.length + 1, textBytes.length);
             
             byte[] chunkType = "tEXt".getBytes(StandardCharsets.ISO_8859_1);
             
-            // Calcular CRC32
+            // Calcular CRC32 (Estándar estructural obligatorio en PNG)
             CRC32 crc = new CRC32();
             crc.update(chunkType);
             crc.update(chunkData);
             int crcValue = (int) crc.getValue();
             
-            // IEND es siempre los últimos 12 bytes del PNG
+            // IEND (marcador de fin) siempre es los últimos 12 bytes del PNG
             if (imageBytes.length < 12) return imageBytes;
             int insertPosition = imageBytes.length - 12;
             
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            baos.write(imageBytes, 0, insertPosition);
+            baos.write(imageBytes, 0, insertPosition); // Malla de píxeles intacta
             
-            // Escribir Chunk tEXt
+            // Escribir nuestro Chunk tEXt personalizado
             baos.write(ByteBuffer.allocate(4).putInt(chunkData.length).array()); // Longitud
-            baos.write(chunkType); // Tipo
-            baos.write(chunkData); // Datos
-            baos.write(ByteBuffer.allocate(4).putInt(crcValue).array()); // CRC
+            baos.write(chunkType); // Tipo de chunk (tEXt)
+            baos.write(chunkData); // Datos Payload
+            baos.write(ByteBuffer.allocate(4).putInt(crcValue).array()); // Checksum CRC
             
-            // Escribir el IEND original
+            // Escribir el IEND original para no corromper la imagen
             baos.write(imageBytes, insertPosition, 12);
             
             return baos.toByteArray();
@@ -84,9 +131,7 @@ public class AdaptadorEsteganografia implements ServicioEsteganograficoPort {
                 return imageBytes;
             }
             
-            String payloadWrapped = "<verisart:ForensePayload><![CDATA[" + jsonPayload + "]]></verisart:ForensePayload>";
-            byte[] payloadBytes = payloadWrapped.getBytes(StandardCharsets.UTF_8);
-            
+            byte[] payloadBytes = jsonPayload.getBytes(StandardCharsets.UTF_8);
             // Usaremos segmento APP11 (FF EB) para evitar conflictos con EXIF (APP1)
             int segmentLength = 2 + payloadBytes.length; // 2 bytes de longitud + datos
             if (segmentLength > 65535) {
@@ -94,18 +139,18 @@ public class AdaptadorEsteganografia implements ServicioEsteganograficoPort {
             }
             
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            baos.write(0xFF); // SOI
+            baos.write(0xFF); // SOI (Start Of Image)
             baos.write(0xD8);
             
             baos.write(0xFF);
-            baos.write(0xEB); // Marcador APP11
+            baos.write(0xEB); // Marcador APP11 (Nuestro sector esteganográfico)
             
             baos.write((segmentLength >> 8) & 0xFF);
             baos.write(segmentLength & 0xFF);
             
             baos.write(payloadBytes);
             
-            // Escribir el resto de la imagen
+            // Escribir el resto de la imagen intacta (píxeles y otros metadatos)
             baos.write(imageBytes, 2, imageBytes.length - 2);
             
             return baos.toByteArray();
@@ -113,38 +158,5 @@ public class AdaptadorEsteganografia implements ServicioEsteganograficoPort {
             throw new RuntimeException("Error inyectando metadata en JPEG", e);
         }
     }
-
-    @Override
-    public byte[] fusionarEOF(byte[] renderConEsteganografia, byte[] certificadoPdfBytes) {
-        // La inyección End-Of-File (EOF) concatena el archivo PDF directamente 
-        // después de los bytes finales de la imagen (por ejemplo, después del FFD9 en JPEG).
-        // Las galerías y redes leen hasta el FFD9 y lo muestran como imagen. 
-        // Nuestro sistema forense leerá desde el marcador para extraer el PDF.
-        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            baos.write(renderConEsteganografia);
-            baos.write(EOF_MAGIC_MARKER);
-            baos.write(certificadoPdfBytes);
-            return baos.toByteArray();
-        } catch (IOException e) {
-            throw new RuntimeException("Error en fusión EOF: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Utilidad para extraer el PDF inyectado en el EOF para el validador
-     */
-    public byte[] extraerPdfDeEOF(byte[] archivoHibrido) {
-        // Buscar el marcador mágico desde el final hacia el inicio
-        String hexContent = new String(archivoHibrido, StandardCharsets.ISO_8859_1);
-        String marker = new String(EOF_MAGIC_MARKER, StandardCharsets.ISO_8859_1);
-        
-        int markerIndex = hexContent.lastIndexOf(marker);
-        if (markerIndex == -1) {
-            throw new IllegalArgumentException("No se encontró evidencia PDF incrustada por EOF en este archivo.");
-        }
-        
-        int startOfPdf = markerIndex + EOF_MAGIC_MARKER.length;
-        return Arrays.copyOfRange(archivoHibrido, startOfPdf, archivoHibrido.length);
-    }
 }
-
+```

@@ -39,6 +39,9 @@ bin/
 ### VS Code ###
 .vscode/
 
+### Obsidian ###
+.obsidian/
+
 ### Mac OS ###
 .DS_Store
 

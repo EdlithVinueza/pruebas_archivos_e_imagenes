@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Certificado Verisart — Autenticidad Digital</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f7f9fb;
+            color: #191c1e;
+        }
+
+        .page {
+            width: 297mm;
+            height: 209mm;
+            margin: 0 auto;
+            background: #fff;
+            padding: 5mm;
+            overflow: hidden;
+        }
+
+        .certificate-border {
+            border: 2px solid #131b2e;
+            height: 198mm;
+            /* Ajuste para el borde */
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .certificate-top-border {
+            height: 3.5mm;
+            background: linear-gradient(90deg, #dcb017 0%, #006c49 60%, #131b2e 100%);
+        }
+
+        .inner {
+            padding: 5mm 8mm;
+            height: 190mm;
+            box-sizing: border-box;
+        }
+
+        /* ── CABECERA ── */
+        .header-table {
+            width: 100%;
+            border-bottom: 2px solid #e0e3e5;
+            padding-bottom: 4mm;
+            margin-bottom: 6mm;
+        }
+
+        .header-table td {
+            vertical-align: top;
+        }
+
+        .monogram {
+            width: 18mm;
+            height: 18mm;
+            background: #131b2e;
+            border-radius: 4mm;
+            text-align: center;
+            line-height: 18mm;
+        }
+
+        .monogram span {
+            color: #dcb017;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+
+        .header-titles {
+            padding-left: 5mm;
+        }
+
+        .header-titles h1 {
+            color: #131b2e;
+            font-size: 14pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .header-titles h2 {
+            color: #45464d;
+            font-size: 9pt;
+            font-weight: 400;
+            margin-top: 1mm;
+            text-transform: uppercase;
+        }
+
+        .header-titles h3 {
+            color: #006c49;
+            font-size: 13pt;
+            font-weight: 700;
+            margin-top: 2mm;
+        }
+
+        .meta-data {
+            font-size: 9pt;
+            color: #45464d;
+            text-align: right;
+        }
+
+        .meta-data p {
+            margin-bottom: 2px;
+            line-height: 1.6;
+        }
+
+        .meta-data strong {
+            color: #131b2e;
+        }
+
+        .cert-id-badge {
+            display: inline-block;
+            background: #131b2e;
+            color: #dcb017;
+            font-size: 10pt;
+            font-weight: 700;
+            padding: 1.5mm 4mm;
+            border-radius: 2mm;
+            margin-bottom: 2mm;
+        }
+
+        /* ── CUERPO ── */
+        .body-table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .col-data {
+            width: 63%;
+            vertical-align: top;
+            padding-right: 8mm;
+        }
+
+        .col-visual {
+            width: 37%;
+            vertical-align: top;
+            border-left: 1.5px solid #e0e3e5;
+            padding-left: 8mm;
+        }
+
+        /* ── SECCIONES ── */
+        .section {
+            margin-bottom: 3mm;
+        }
+
+        .section-title {
+            margin-bottom: 2mm;
+        }
+
+        .section-title-table {
+            width: 100%;
+        }
+
+        .section-title-table td {
+            vertical-align: middle;
+        }
+
+        .num {
+            background: #dcb017;
+            color: #131b2e;
+            font-size: 9pt;
+            font-weight: bold;
+            width: 7mm;
+            height: 7mm;
+            border-radius: 1.5mm;
+            text-align: center;
+            line-height: 7mm;
+        }
+
+        .label-text {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #131b2e;
+            text-transform: uppercase;
+            padding-left: 3mm;
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+        }
+
+        table.data-table td {
+            padding: 1.5mm 2mm;
+            vertical-align: top;
+            border-bottom: 1px solid #e0e3e5;
+            line-height: 1.3;
+        }
+
+        table.data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table.data-table td.label {
+            width: 38%;
+            color: #45464d;
+            font-weight: bold;
+        }
+
+        table.data-table td.value {
+            color: #191c1e;
+        }
+
+        .hash-value {
+            font-family: 'Courier New', monospace;
+            font-size: 8.5pt;
+            color: #006c49;
+            word-break: break-all;
+        }
+
+        .status-valid {
+            background: #6cf8bb;
+            color: #006c49;
+            font-weight: bold;
+            font-size: 9pt;
+            padding: 1.5mm 3.5mm;
+            border-radius: 2mm;
+        }
+
+        /* ── IMAGEN ── */
+        .artwork-container {
+            background: #f7f9fb;
+            border: 1px solid #e0e3e5;
+            border-radius: 2mm;
+            text-align: center;
+            padding: 2mm;
+            height: 70mm;
+            margin-bottom: 3mm;
+        }
+
+        .artwork-img {
+            max-width: 100%;
+            max-height: 66mm;
+        }
+
+        .artwork-placeholder {
+            color: #45464d;
+            font-size: 10pt;
+            opacity: 0.5;
+            margin-top: 30mm;
+        }
+
+        /* ── QR ── */
+        .qr-table {
+            width: 100%;
+            border-top: 1.5px solid #e0e3e5;
+            padding-top: 3mm;
+        }
+
+        .qr-wrapper {
+            padding: 2mm;
+            border: 1px solid #e0e3e5;
+            border-radius: 2mm;
+            background: white;
+            width: 44mm;
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 40mm;
+            height: 40mm;
+            display: inline-block;
+        }
+
+        .qr-text {
+            font-size: 9pt;
+            color: #45464d;
+            line-height: 1.5;
+            padding-left: 4mm;
+            vertical-align: top;
+        }
+
+        .qr-text strong {
+            color: #131b2e;
+            display: block;
+            margin-bottom: 2mm;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+
+        /* ── PIE ── */
+        .footer-table {
+            width: 100%;
+            border-top: 1.5px solid #e0e3e5;
+            padding-top: 2mm;
+            margin-top: 4mm;
+        }
+
+        .footer-line {
+            font-size: 7.5pt;
+            color: #45464d;
+            line-height: 1.5;
+        }
+
+        .footer-seal {
+            font-size: 8pt;
+            font-weight: bold;
+            color: #dcb017;
+            background: #131b2e;
+            padding: 2mm 4mm;
+            border-radius: 2mm;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="certificate-border">
+            <div class="certificate-top-border"></div>
+            <div class="inner">
+
+                <!-- CABECERA -->
+                <table class="header-table">
+                    <tr>
+                        <td style="width: 18mm;">
+                            <div class="monogram"><span>VERISART</span></div>
+                        </td>
+                        <td class="header-titles">
+                            <h1>UNIVERSIDAD CENTRAL DEL ECUADOR</h1>
+                            <h2>Facultad de Ingeniería &nbsp;·&nbsp; Unidad de Investigación &nbsp;·&nbsp; Powered by
+                                Verisart</h2>
+                            <h3>Certificado Verisart de Autenticidad Digital</h3>
+                        </td>
+                        <td class="meta-data">
+                            <div class="cert-id-badge" th:text="${idCertificado}">CERT-0000000</div>
+                            <p><strong>Fecha de Emisión:</strong> &nbsp;<span th:text="${fechaEmision}">2026-06-17
+                                    19:20:00 UTC</span></p>
+                            <p><strong>Versión de Metadatos:</strong> &nbsp;<span
+                                    th:text="${versionMetadatos}">1.1</span></p>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- CUERPO -->
+                <table class="body-table">
+                    <tr>
+                        <!-- COLUMNA IZQUIERDA -->
+                        <td class="col-data">
+                            <div class="section">
+                                <div class="section-title">
+                                    <table class="section-title-table">
+                                        <tr>
+                                            <td style="width: 7mm;">
+                                                <div class="num">1</div>
+                                            </td>
+                                            <td><span class="label-text">Autor</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table class="data-table">
+                                    <tr>
+                                        <td class="label">Nombre</td>
+                                        <td class="value" th:text="${autorObra}">Nombre del Autor</td>
+                                    </tr>
+                                    <tr th:if="${seudonimo != null and !seudonimo.isEmpty()}">
+                                        <td class="label">Seudónimo</td>
+                                        <td class="value" th:text="${seudonimo}">Seudónimo del Artista</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Identificación Institucional</td>
+                                        <td class="value" th:text="${idInstitucional}">ID-000000</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="section">
+                                <div class="section-title">
+                                    <table class="section-title-table">
+                                        <tr>
+                                            <td style="width: 7mm;">
+                                                <div class="num">2</div>
+                                            </td>
+                                            <td><span class="label-text">Especificaciones de la Obra</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table class="data-table">
+                                    <tr>
+                                        <td class="label">Título de la Ilustración</td>
+                                        <td class="value"><strong th:text="'&quot;' + ${tituloObra} + '&quot;'">"Título
+                                                de la Obra"</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Fecha Declarada de Creación</td>
+                                        <td class="value" th:text="${fechaCreacion}">2026-06-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Software Original</td>
+                                        <td class="value" th:text="${software}">Adobe Photoshop / Procreate</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Hardware Utilizado</td>
+                                        <td class="value" th:text="${hardware}">Tableta gráfica Wacom</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Detalles Técnicos</td>
+                                        <td class="value" th:text="${detallesTecnicos}">Ilustración digital, 300 DPI,
+                                            RGB</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="section">
+                                <div class="section-title">
+                                    <table class="section-title-table">
+                                        <tr>
+                                            <td style="width: 7mm;">
+                                                <div class="num">3</div>
+                                            </td>
+                                            <td><span class="label-text">Análisis Forense Digital</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table class="data-table">
+                                    <tr>
+                                        <td class="label">Dimensiones</td>
+                                        <td class="value" th:text="${dimensiones}">3840 × 2160 px</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Hash SHA-256</td>
+                                        <td class="value hash-value" th:text="${sha256}">
+                                            e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Hash Perceptual (pHash)</td>
+                                        <td class="value hash-value" th:text="${phash}">8f3c3c4f5a6b7d8e</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Estado de Validación</td>
+                                        <td class="value">
+                                            <span class="status-valid" th:text="${estado}">VÁLIDO</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+
+                        <!-- COLUMNA DERECHA -->
+                        <td class="col-visual">
+                            <div class="section-title">
+                                <table class="section-title-table">
+                                    <tr>
+                                        <td style="width: 7mm;">
+                                            <div class="num">4</div>
+                                        </td>
+                                        <td><span class="label-text">Vista Previa de la Obra</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="artwork-container">
+                                <img th:if="${obraBase64 != null}" th:src="'data:image/png;base64,' + ${obraBase64}"
+                                    class="artwork-img" alt="Vista previa de la obra" />
+                                <div class="artwork-placeholder" th:unless="${obraBase64 != null}">
+                                    [ Imagen no disponible ]
+                                </div>
+                            </div>
+
+                            <table class="qr-table">
+                                <tr>
+                                    <td style="width: 44mm;">
+                                        <div class="qr-wrapper">
+                                            <img th:src="'data:image/png;base64,' + ${qrBase64}" class="qr-code"
+                                                alt="QR de validación" />
+                                        </div>
+                                    </td>
+                                    <td class="qr-text">
+                                        <strong>Verificar en Verisart</strong>
+                                        Escanee este código con su celular para verificar inmediatamente la huella
+                                        forense de esta obra en el portal Verisart.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- PIE -->
+                <table class="footer-table">
+                    <tr>
+                        <td class="footer-line">
+                            Generado automáticamente por Verisart — Sistema Forense Digital. Las firmas criptográficas
+                            incluidas en el Código QR<br />
+                            y en la metadata del archivo original (EOF / XMP) garantizan la integridad y el no repudio
+                            de la información aquí detallada.
+                        </td>
+                        <td style="width: 50mm; text-align: right; vertical-align: top;">
+                            <span class="footer-seal">VERISART</span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

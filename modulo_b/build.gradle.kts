@@ -39,6 +39,9 @@ dependencies {
     implementation("com.google.zxing:core:3.5.3")
     implementation("com.google.zxing:javase:3.5.3")
 
+    // Thymeleaf para procesamiento de Plantillas HTML
+    implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
+
     // Lombok: elimina boilerplate de getters, setters y builders
     compileOnly("org.projectlombok:lombok:1.18.46")
     annotationProcessor("org.projectlombok:lombok:1.18.46")
