@@ -33,10 +33,10 @@ public class ImageLoader {
             int width = reader.getWidth(0);
             int height = reader.getHeight(0);
 
-            // Si las dimensiones superan 256 píxeles, aplicamos submuestreo dinámico.
+            // Si las dimensiones superan 512 píxeles, aplicamos submuestreo dinámico.
             // Para pHash, un submuestreo que nos deje una imagen de ~64x64 es ideal,
             // ahorrando el 99.9% de memoria en imágenes ultra pesadas.
-            if (width > 256 || height > 256) {
+            if (width > 512 || height > 512) {
                 int menorDimension = Math.min(width, height);
                 int subsampling = Math.max(1, menorDimension / 64);
                 param.setSourceSubsampling(subsampling, subsampling, 0, 0);

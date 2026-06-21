@@ -11,10 +11,14 @@
             "id": "6976a535bbcd8f83",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "README"
             }
           }
         ]
@@ -179,18 +183,23 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "6976a535bbcd8f83",
+  "active": "fc373a5e94623a51",
   "lastOpenFiles": [
+    "docs/README.md",
     "README.md",
-    "docs/fase4_certificacion_y_esteganografia/00_resumen_fase_4.md",
-    "docs/fase4_certificacion_y_esteganografia/02_generacion_pdf_y_fusion_eof.md",
-    "docs/fase4_certificacion_y_esteganografia/03_generacion_pdf_minimalista.md",
+    "docs/fase1_validacion/03_comparacion_perceptual_phash.md",
     "docs/fase1_validacion/02_patrones_diseno_y_validaciones.md",
     "docs/fase1_validacion/01_analisis_metadata_y_estructura.md",
     "docs/fase1_validacion/00_resumen_fase_1.md",
-    "docs/fase1_validacion/03_comparacion_perceptual_phash.md",
+    "docs/fase1_validacion",
     "docs/conceptos_clave/justificacion.md",
     "docs/conceptos_clave/01_validez_legal_y_firma_ecuador.md",
+    "docs/conceptos_clave",
+    "implementation_plan.md",
+    "implementation_plan_2.md",
+    "docs/fase4_certificacion_y_esteganografia/00_resumen_fase_4.md",
+    "docs/fase4_certificacion_y_esteganografia/02_generacion_pdf_y_fusion_eof.md",
+    "docs/fase4_certificacion_y_esteganografia/03_generacion_pdf_minimalista.md",
     "docs/fase4_certificacion_y_esteganografia/01_esteganografia_metadata.md",
     "modulo_b/build/test-results/test/binary/results-generic.bin",
     "modulo_b/build/test-results/test/binary/in-progress-results-generic6989702653945012067.bin",
@@ -201,8 +210,6 @@
     "modulo_b/build/reports/tests/test/org.example.analisis.integracion.FlujoEndToEndTest/testFlujoCompletoDeCertificacion_JPEG().html",
     "modulo_b/build/reports/tests/test/org.example.analisis.integracion.FlujoEndToEndTest/testFlujoCompletoDeCertificacion_PNG().html",
     "modulo_b/build/resultados_test/jpeg/Girasol_Certificado_E2E.jpg",
-    "modulo_b/build/resultados_test/jpeg",
-    "modulo_b/build/resultados_test/Certificado_Final_E2E_JPEG.pdf",
     "modulo_b/build/resultados_test/png/Girasol_Certificado_E2E.png",
     "docs/fase3_firma_criptografica/00_resumen_fase_3.md",
     "docs/fase2_recepcion_datos/00_resumen_fase_2.md",

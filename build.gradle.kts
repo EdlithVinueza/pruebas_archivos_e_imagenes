@@ -25,6 +25,25 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.46")
     annotationProcessor("org.projectlombok:lombok:1.18.46")
 
+    // Gson: serialización JSON del expediente
+    implementation("com.google.code.gson:gson:2.11.0")
+
+    // ZXing: generación de código QR (Opción A — ID interno)
+    implementation("com.google.zxing:core:3.5.3")
+    implementation("com.google.zxing:javase:3.5.3")
+
+    // iText 7: generación del PDF del certificado + PdfSigner (firma digital real)
+    implementation("com.itextpdf:itext7-core:7.2.6")
+    implementation("com.itextpdf:sign:7.2.6")
+    implementation("com.itextpdf:html2pdf:4.0.5")
+
+    // Thymeleaf: motor de plantillas HTML
+    implementation("org.thymeleaf:thymeleaf:3.1.2.RELEASE")
+
+    // BouncyCastle: proveedor criptográfico obligatorio para iText 7 PdfSigner
+    implementation("org.bouncycastle:bcpkix-jdk15on:1.70")
+    implementation("org.bouncycastle:bcprov-jdk15on:1.70")
+
     // JUnit 5 para pruebas unitarias
     testImplementation(platform("org.junit:junit-bom:5.10.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -32,7 +51,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("org.example.Main")
+    mainClass.set("ec.edu.uce.certificadorforense.Main")
 }
 
 tasks.test {
