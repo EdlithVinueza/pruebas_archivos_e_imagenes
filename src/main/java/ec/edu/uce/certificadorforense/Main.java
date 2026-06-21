@@ -1,25 +1,25 @@
-package analisis;
+package ec.edu.uce.certificadorforense;
 
-import analisis.core.model.base.ArchivoBase;
-import analisis.core.model.imagen.ArchivoImagen;
-import analisis.core.model.psd.ArchivoPSD;
-import analisis.core.model.validacion.VeredictoFinal;
-import analisis.core.ports.out.ArchivoProcessorPort;
-import analisis.core.rules.imagen.ReglaAnalisisOrigen;
-import analisis.core.rules.imagen.ReglaCoherenciaDpi;
-import analisis.core.rules.imagen.ReglaFirmaEstructural;
-import analisis.core.rules.psd.ReglaComplejidadDiseno;
-import analisis.core.rules.psd.ReglaFormatoPsd;
-import analisis.core.rules.psd.ReglaImagenPegada;
-import analisis.core.rules.psd.ReglaResolucionProfesional;
-import analisis.core.service.ArchivoProcessorFactory;
-import analisis.core.service.ValidadorGenericoService;
-import analisis.core.service.CalculadorPHash;
-import analisis.adapters.processors.ArchivoImagenProcessor;
-import analisis.adapters.processors.ArchivoPSDProcessor;
-import analisis.adapters.processors.ImageLoader;
-import org.example.analisis.core.rules.imagen.*;
-import org.example.analisis.core.rules.psd.*;
+import ec.edu.uce.certificadorforense.core.model.base.ArchivoBase;
+import ec.edu.uce.certificadorforense.core.model.imagen.ArchivoImagen;
+import ec.edu.uce.certificadorforense.core.model.psd.ArchivoPSD;
+import ec.edu.uce.certificadorforense.core.model.validacion.VeredictoFinal;
+import ec.edu.uce.certificadorforense.core.ports.out.ArchivoProcessorPort;
+import ec.edu.uce.certificadorforense.core.rules.imagen.ReglaAnalisisOrigen;
+import ec.edu.uce.certificadorforense.core.rules.imagen.ReglaCoherenciaDpi;
+import ec.edu.uce.certificadorforense.core.rules.imagen.ReglaFirmaEstructural;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaComplejidadDiseno;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaFormatoPsd;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaImagenPegada;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaResolucionProfesional;
+import ec.edu.uce.certificadorforense.core.service.ArchivoProcessorFactory;
+import ec.edu.uce.certificadorforense.core.service.ValidadorGenericoService;
+import ec.edu.uce.certificadorforense.core.service.CalculadorPHash;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.processors.ArchivoImagenProcessor;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.processors.ArchivoPSDProcessor;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.processors.ImageLoader;
+import ec.edu.uce.certificadorforense.core.rules.imagen.*;
+import ec.edu.uce.certificadorforense.core.rules.psd.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -60,11 +60,11 @@ public class Main {
         File archivoPNG = new File(pathRecursos + "imagenes_prueba/original.png");
 
         if (!archivoPSD.exists() || !archivoPNG.exists()) {
-            System.err.println("❌ Error: Asegúrate de tener los archivos Chica de cabello y girasoles - 05-02-2026.psd (en archivos_psd_prueba) y original.png (en imagenes_prueba).");
+            System.err.println("Error: Asegúrate de tener los archivos Chica de cabello y girasoles - 05-02-2026.psd (en archivos_psd_prueba) y original.png (en imagenes_prueba).");
             return;
         }
 
-        System.out.println("\n🔥 ANALIZANDO ARCHIVOS EXTREMADAMENTE PESADOS...");
+        System.out.println("\nANALIZANDO ARCHIVOS EXTREMADAMENTE PESADOS...");
         System.out.println("• Archivo PSD: " + archivoPSD.getName() + " (" + (archivoPSD.length() / (1024 * 1024)) + " MB)");
         System.out.println("• Archivo PNG: " + archivoPNG.getName() + " (" + (archivoPNG.length() / (1024 * 1024)) + " MB)");
 
@@ -90,7 +90,7 @@ public class Main {
             e.printStackTrace();
         }
         long endPSD = System.currentTimeMillis();
-        System.out.println("⏱️ Tiempo PSD: " + (endPSD - startPSD) + " ms");
+        System.out.println("Tiempo PSD: " + (endPSD - startPSD) + " ms");
 
         // B. Procesar y validar PNG
         System.out.println("\n--- [B. PROCESANDO PNG] ---");
@@ -109,13 +109,13 @@ public class Main {
             e.printStackTrace();
         }
         long endPNG = System.currentTimeMillis();
-        System.out.println("⏱️ Tiempo PNG: " + (endPNG - startPNG) + " ms");
+        System.out.println("Tiempo PNG: " + (endPNG - startPNG) + " ms");
 
         // C. Similitud Perceptual Forense (si ambos son válidos)
         System.out.println("\n--- [C. COMPARACIÓN DE SIMILITUD PERCEPTUAL FORENSE (p-Hash)] ---");
         if (psd != null && png != null && !veredictoPSD.isEsRechazado() && !veredictoPNG.isEsRechazado()) {
             long startSim = System.currentTimeMillis();
-            System.out.println("⏳ Extrayendo e indexando firmas visuales de manera optimizada en memoria...");
+            System.out.println("Extrayendo e indexando firmas visuales de manera optimizada en memoria...");
 
             // Carga submuestreada de alto rendimiento (consume casi 0 RAM al no decodificar el lienzo completo)
             BufferedImage imgPSD = ImageLoader.loadWithSubsampling(archivoPSD);
@@ -130,27 +130,27 @@ public class Main {
                 double porcentajeSimilitud = calculadorPHash.compararSimilitud(hashPSD, hashPNG);
                 long endSim = System.currentTimeMillis();
 
-                System.out.println("\n📊 REPORTE DE SIMILITUD FORENSE:");
+                System.out.println("\nREPORTE DE SIMILITUD FORENSE:");
                 System.out.println("• Hash Perceptual PSD composite: " + hashPSD);
                 System.out.println("• Hash Perceptual PNG subida   : " + hashPNG);
                 System.out.printf("• Porcentaje de Coincidencia  : %.2f%%%n", porcentajeSimilitud);
-                System.out.println("⏱️ Tiempo Extracción/Comparación: " + (endSim - startSim) + " ms");
+                System.out.println("Tiempo Extracción/Comparación: " + (endSim - startSim) + " ms");
 
                 if (porcentajeSimilitud >= 95.0) {
-                    System.out.println("\n🟢 VEREDICTO FINAL DE AUTENTICIDAD: EXCELENTE");
+                    System.out.println("\nVEREDICTO FINAL DE AUTENTICIDAD: EXCELENTE");
                     System.out.println("  La imagen PNG coincide plenamente con la composición pre-renderizada del archivo PSD.");
                 } else if (porcentajeSimilitud >= 80.0) {
-                    System.out.println("\n🟡 VEREDICTO FINAL DE AUTENTICIDAD: SOSPECHOSO / MODIFICADO");
+                    System.out.println("\nVEREDICTO FINAL DE AUTENTICIDAD: SOSPECHOSO / MODIFICADO");
                     System.out.println("  Hay alta similitud, pero se detectan variaciones de encuadre, color o edición.");
                 } else {
-                    System.err.println("\n🔴 VEREDICTO FINAL DE AUTENTICIDAD: FRAUDE DETECTADO");
+                    System.err.println("\nVEREDICTO FINAL DE AUTENTICIDAD: FRAUDE DETECTADO");
                     System.err.println("  Las firmas perceptuales no coinciden en absoluto. La imagen subida no procede de este PSD.");
                 }
             } else {
-                System.err.println("❌ Fallo crítico al cargar composiciones visuales.");
+                System.err.println("Fallo crítico al cargar composiciones visuales.");
             }
         } else {
-            System.err.println("🛑 No se realiza comparación forense: Uno o ambos archivos fallaron las reglas de autenticidad base.");
+            System.err.println("No se realiza comparación forense: Uno o ambos archivos fallaron las reglas de autenticidad base.");
             if (veredictoPSD != null && veredictoPSD.isEsRechazado()) {
                 System.err.println("  └─ PSD Rechazado por: " + veredictoPSD.getRazonRechazo());
             }
@@ -161,7 +161,7 @@ public class Main {
 
         long globalEnd = System.currentTimeMillis();
         System.out.println("\n=========================================================");
-        System.out.printf("🏁 PROCESAMIENTO FORENSE INTEGRAL COMPLETADO EN: %d ms%n", (globalEnd - globalStart));
+        System.out.printf("PROCESAMIENTO FORENSE INTEGRAL COMPLETADO EN: %d ms%n", (globalEnd - globalStart));
         System.out.println("=========================================================");
     }
 }

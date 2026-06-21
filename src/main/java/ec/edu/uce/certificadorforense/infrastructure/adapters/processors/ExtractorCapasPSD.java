@@ -1,6 +1,6 @@
-package analisis.adapters.processors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.processors;
 
-import analisis.core.model.psd.EstructuraCapaPSD;
+import ec.edu.uce.certificadorforense.core.model.psd.EstructuraCapaPSD;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

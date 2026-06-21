@@ -1,17 +1,16 @@
-package analisis.analisis;
+package ec.edu.uce.certificadorforense.fase1;
 
-import analisis.core.model.psd.ArchivoPSD;
-import analisis.core.model.validacion.ResultadoValidacion;
-import analisis.core.model.validacion.VeredictoFinal;
-import analisis.core.ports.out.ArchivoProcessorPort;
-import analisis.core.rules.psd.ReglaComplejidadDiseno;
-import analisis.core.rules.psd.ReglaFormatoPsd;
-import analisis.core.rules.psd.ReglaImagenPegada;
-import analisis.core.rules.psd.ReglaResolucionProfesional;
-import analisis.core.service.ArchivoProcessorFactory;
-import analisis.core.service.ValidadorGenericoService;
-import analisis.adapters.processors.ArchivoPSDProcessor;
-import org.example.analisis.core.rules.psd.*;
+import ec.edu.uce.certificadorforense.core.model.psd.ArchivoPSD;
+import ec.edu.uce.certificadorforense.core.model.validacion.ResultadoValidacion;
+import ec.edu.uce.certificadorforense.core.model.validacion.VeredictoFinal;
+import ec.edu.uce.certificadorforense.core.ports.out.ArchivoProcessorPort;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaComplejidadDiseno;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaFormatoPsd;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaImagenPegada;
+import ec.edu.uce.certificadorforense.core.rules.psd.ReglaResolucionProfesional;
+import ec.edu.uce.certificadorforense.core.service.ArchivoProcessorFactory;
+import ec.edu.uce.certificadorforense.core.service.ValidadorGenericoService;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.processors.ArchivoPSDProcessor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

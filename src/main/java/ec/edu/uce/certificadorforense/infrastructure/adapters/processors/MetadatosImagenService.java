@@ -1,13 +1,11 @@
-package analisis.adapters.processors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.processors;
 
-import analisis.adapters.extractors.imagen.*;
-import analisis.analisis.infrastructure.adapters.extractors.imagen.*;
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.metadata.Metadata;
-import analisis.adapters.extractors.MetadataExtractor;
-import analisis.core.model.imagen.MetadatosImagen;
-import infrastructure.adapters.extractors.imagen.*;
-import org.example.analisis.infrastructure.adapters.extractors.imagen.*;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.extractors.MetadataExtractor;
+import ec.edu.uce.certificadorforense.core.model.imagen.MetadatosImagen;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.extractors.imagen.*;
+
 
 import java.io.File;
 import java.util.Arrays;

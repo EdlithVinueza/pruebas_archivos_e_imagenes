@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ec.edu.uce.certificadorforense.PHashTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-06-21T13:53:07.766Z" hostname="THINKPAD-L15" time="4.112">
+  <properties/>
+  <testcase name="testSimilitudEntreCompositePHash()" classname="ec.edu.uce.certificadorforense.PHashTest" time="2.925"/>
+  <testcase name="testGenerarHashPerceptual()" classname="ec.edu.uce.certificadorforense.PHashTest" time="1.183"/>
+  <system-out><![CDATA[Porcentaje de similitud perceptual obtenido: 100.0%
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

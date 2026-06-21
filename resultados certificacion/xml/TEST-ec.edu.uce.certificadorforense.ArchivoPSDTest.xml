@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ec.edu.uce.certificadorforense.ArchivoPSDTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-06-21T13:53:01.486Z" hostname="THINKPAD-L15" time="0.111">
+  <properties/>
+  <testcase name="testProcesamientoYValidacionReglasPSD()" classname="ec.edu.uce.certificadorforense.ArchivoPSDTest" time="0.106"/>
+  <system-out><![CDATA[
+Iniciando peritaje forense: girasol-original-una-capa.psd
+Veredicto PSD: true | Razón: Autenticidad Técnica
+]]></system-out>
+  <system-err><![CDATA[ CORTOCIRCUITO: Análisis abortado por regla crítica [Autenticidad Técnica]
+]]></system-err>
+</testsuite>

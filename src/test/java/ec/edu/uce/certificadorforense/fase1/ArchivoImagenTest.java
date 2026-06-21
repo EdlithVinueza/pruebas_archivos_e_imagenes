@@ -1,16 +1,15 @@
-package analisis.analisis;
+package ec.edu.uce.certificadorforense.fase1;
 
-import analisis.core.model.imagen.ArchivoImagen;
-import analisis.core.model.validacion.ResultadoValidacion;
-import analisis.core.model.validacion.VeredictoFinal;
-import analisis.core.ports.out.ArchivoProcessorPort;
-import analisis.core.rules.imagen.ReglaAnalisisOrigen;
-import analisis.core.rules.imagen.ReglaCoherenciaDpi;
-import analisis.core.rules.imagen.ReglaFirmaEstructural;
-import analisis.core.service.ArchivoProcessorFactory;
-import analisis.core.service.ValidadorGenericoService;
-import analisis.adapters.processors.ArchivoImagenProcessor;
-import org.example.analisis.core.rules.imagen.*;
+import ec.edu.uce.certificadorforense.core.model.imagen.ArchivoImagen;
+import ec.edu.uce.certificadorforense.core.model.validacion.ResultadoValidacion;
+import ec.edu.uce.certificadorforense.core.model.validacion.VeredictoFinal;
+import ec.edu.uce.certificadorforense.core.ports.out.ArchivoProcessorPort;
+import ec.edu.uce.certificadorforense.core.rules.imagen.ReglaAnalisisOrigen;
+import ec.edu.uce.certificadorforense.core.rules.imagen.ReglaCoherenciaDpi;
+import ec.edu.uce.certificadorforense.core.rules.imagen.ReglaFirmaEstructural;
+import ec.edu.uce.certificadorforense.core.service.ArchivoProcessorFactory;
+import ec.edu.uce.certificadorforense.core.service.ValidadorGenericoService;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.processors.ArchivoImagenProcessor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

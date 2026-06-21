@@ -1,9 +1,9 @@
-package analisis.adapters.extractors.imagen;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.extractors.imagen;
 
 import com.drew.metadata.Metadata;
 import com.drew.metadata.jfif.JfifDirectory;
-import analisis.adapters.extractors.MetadataExtractor;
-import analisis.core.model.imagen.MetadatosImagen;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.extractors.MetadataExtractor;
+import ec.edu.uce.certificadorforense.core.model.imagen.MetadatosImagen;
 
 public class Jfif implements MetadataExtractor<MetadatosImagen.MetadatosImagenBuilder> {
     @Override

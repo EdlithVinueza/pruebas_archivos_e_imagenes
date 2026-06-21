@@ -1,4 +1,4 @@
-package analisis.adapters.processors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.processors;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;

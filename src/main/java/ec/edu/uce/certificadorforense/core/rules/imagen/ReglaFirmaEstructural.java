@@ -1,8 +1,8 @@
-package analisis.core.rules.imagen;
+package ec.edu.uce.certificadorforense.core.rules.imagen;
 
-import analisis.core.rules.IReglaValidacion;
-import analisis.core.model.imagen.ArchivoImagen;
-import analisis.core.model.validacion.ResultadoValidacion;
+import ec.edu.uce.certificadorforense.core.rules.IReglaValidacion;
+import ec.edu.uce.certificadorforense.core.model.imagen.ArchivoImagen;
+import ec.edu.uce.certificadorforense.core.model.validacion.ResultadoValidacion;
 
 public class ReglaFirmaEstructural implements IReglaValidacion<ArchivoImagen> {
     @Override

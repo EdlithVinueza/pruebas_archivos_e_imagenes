@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ec.edu.uce.certificadorforense.ForenseIntegracionTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-06-21T13:53:01.606Z" hostname="THINKPAD-L15" time="6.158">
+  <properties/>
+  <testcase name="testFlujoForenseCompleto()" classname="ec.edu.uce.certificadorforense.ForenseIntegracionTest" time="6.15"/>
+  <system-out><![CDATA[=========================================================
+]]>&#x1f680;<![CDATA[ EJECUTANDO INTEGRACIÓN FORENSE COMPLETA (JUNIT) ]]>&#x1f680;<![CDATA[
+=========================================================
+
+]]>&#x1f525;<![CDATA[ ANALIZANDO ARCHIVOS FORENSES...
+• Archivo PSD: girasoles-original.psd (249 MB)
+• Archivo PNG: girasol-original.png (15 MB)
+
+--- [A. PROCESANDO PSD] ---
+
+Iniciando peritaje forense: girasoles-original.psd
+
+====================================================
+   REPORTE TÉCNICO COMPLETO: PSD
+====================================================
+
+[1. CABECERA DEL ARCHIVO]
+  - Dimensiones       : 4320 x 5400 píxeles
+  - Resolución        : 600,00 x 600,00 DPI (Original: 600x600 DPI)
+  - Canales           : 4 canales
+  - Profundidad       : 8 bits por canal
+  - Modo de Color     : RGB
+
+[2. RECURSOS INTERNOS DE PHOTOSHOP]
+  - Estado de Capas   : 0 109
+  - Miniatura (Thumb) : Ausente
+
+[3. IDENTIFICACIÓN Y SISTEMA]
+  - Nombre Largo      : Photoshop Document
+  - Tipo MIME         : image/vnd.adobe.photoshop
+  - Extensión Sugerida: psd
+  - Software/Motor    : Desconocido
+
+[4. METADATOS DE ORIGEN]
+  - Autor/Artista     : No especificado
+  - Fecha de Creación : No disponible
+
+[5. PERFIL DE COLOR ICC]
+  - ¿Tiene Perfil?    : NO
+
+[6. VALIDACIONES]
+  - ¿Calidad Pro?     : SÍ (>=150 DPI) ✅
+====================================================
+
+• Capas binarias extraídas: 123
+⏱️ Tiempo PSD: 54 ms
+
+--- [B. PROCESANDO PNG] ---
+
+Iniciando peritaje forense: girasol-original.png
+
+======= REPORTE TÉCNICO DE IMAGEN =======
+• Dimensiones:       4320 x 5400 px
+• Tipo de Color:     True Color
+• DPI (X/Y):         600,0 (23622 / 23622 Metres)
+• Tiene Perfil ICC: false
+• Descripcion Perfil ICC:        false
+• Bloque sRGB:       null
+• Bloque Gamma:      null
+• MIME:        image/png
+• Ext:        png
+==========================================
+
+[ANÁLISIS ESTRUCTURAL BINARIO]
+• Firma (Magic):    89 50 4E 47
+• Formato Real:     PNG
+• Densidad Física:  600 x 600 DPI
+⏱️ Tiempo PNG: 134 ms
+
+--- [C. COMPARACIÓN DE SIMILITUD PERCEPTUAL FORENSE (p-Hash)] ---
+⏳ Extrayendo e indexando firmas visuales de manera optimizada en memoria...
+
+]]>&#x1f4ca;<![CDATA[ REPORTE DE SIMILITUD FORENSE:
+• Hash Perceptual PSD composite: 0000000100110011001110011111100111111001001110000011010000010010
+• Hash Perceptual PNG subida   : 0000000100110011001110011111100111111001001110000011010000010010
+• Porcentaje de Coincidencia  : 100,00%
+⏱️ Tiempo Extracción/Comparación: 5925 ms
+
+=========================================================
+]]>&#x1f3c1;<![CDATA[ PROCESAMIENTO FORENSE INTEGRAL COMPLETADO EN: 6126 ms
+=========================================================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

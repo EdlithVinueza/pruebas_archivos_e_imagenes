@@ -1,10 +1,10 @@
-package analisis.core.model.imagen;
+package ec.edu.uce.certificadorforense.core.model.imagen;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import analisis.core.model.base.ArchivoBase;
+import ec.edu.uce.certificadorforense.core.model.base.ArchivoBase;
 
 @Getter
 @Setter

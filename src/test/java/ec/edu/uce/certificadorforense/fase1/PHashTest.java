@@ -1,7 +1,7 @@
-package analisis.analisis;
+package ec.edu.uce.certificadorforense.fase1;
 
-import analisis.core.service.CalculadorPHash;
-import analisis.adapters.processors.ImageLoader;
+import ec.edu.uce.certificadorforense.core.service.CalculadorPHash;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.processors.ImageLoader;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

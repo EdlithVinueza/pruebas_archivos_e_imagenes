@@ -1,9 +1,9 @@
-package analisis.adapters.processors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.processors;
 
-import analisis.core.ports.out.ArchivoProcessorPort;
-import analisis.core.model.imagen.ArchivoImagen;
-import analisis.core.model.imagen.MetadatosImagen;
-import analisis.core.model.imagen.EstructuraImagen;
+import ec.edu.uce.certificadorforense.core.ports.out.ArchivoProcessorPort;
+import ec.edu.uce.certificadorforense.core.model.imagen.ArchivoImagen;
+import ec.edu.uce.certificadorforense.core.model.imagen.MetadatosImagen;
+import ec.edu.uce.certificadorforense.core.model.imagen.EstructuraImagen;
 
 import java.io.File;
 

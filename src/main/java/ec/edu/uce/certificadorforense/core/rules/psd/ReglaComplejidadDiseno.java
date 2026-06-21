@@ -1,9 +1,9 @@
-package analisis.core.rules.psd;
+package ec.edu.uce.certificadorforense.core.rules.psd;
 
-import analisis.core.rules.IReglaValidacion;
-import analisis.core.model.psd.ArchivoPSD;
-import analisis.core.model.validacion.ResultadoValidacion;
-import analisis.core.model.psd.EstructuraCapaPSD;
+import ec.edu.uce.certificadorforense.core.rules.IReglaValidacion;
+import ec.edu.uce.certificadorforense.core.model.psd.ArchivoPSD;
+import ec.edu.uce.certificadorforense.core.model.validacion.ResultadoValidacion;
+import ec.edu.uce.certificadorforense.core.model.psd.EstructuraCapaPSD;
 
 public class ReglaComplejidadDiseno implements IReglaValidacion<ArchivoPSD> {
     @Override

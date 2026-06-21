@@ -1,4 +1,4 @@
-package analisis.core.model.validacion;
+package ec.edu.uce.certificadorforense.core.model.validacion;
 
 import lombok.Getter;
 import lombok.ToString;

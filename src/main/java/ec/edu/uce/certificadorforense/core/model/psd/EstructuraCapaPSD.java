@@ -1,4 +1,4 @@
-package analisis.core.model.psd;
+package ec.edu.uce.certificadorforense.core.model.psd;
 
 import lombok.Builder;
 import lombok.Data;

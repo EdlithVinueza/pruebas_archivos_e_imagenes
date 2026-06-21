@@ -1,6 +1,6 @@
-package analisis.core.ports;
+package ec.edu.uce.certificadorforense.core.ports;
 
-import analisis.core.model.base.ArchivoBase;
+import ec.edu.uce.certificadorforense.core.model.base.ArchivoBase;
 import java.io.File;
 
 public interface ArchivoProcessor<T extends ArchivoBase> {

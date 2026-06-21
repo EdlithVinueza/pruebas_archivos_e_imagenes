@@ -1,7 +1,7 @@
-package analisis.core.service;
+package ec.edu.uce.certificadorforense.core.service;
 
-import analisis.core.model.base.ArchivoBase;
-import analisis.core.ports.out.ArchivoProcessorPort;
+import ec.edu.uce.certificadorforense.core.model.base.ArchivoBase;
+import ec.edu.uce.certificadorforense.core.ports.out.ArchivoProcessorPort;
 
 import java.io.File;
 import java.util.List;

@@ -1,9 +1,9 @@
-package analisis.adapters.processors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.processors;
 
-import analisis.core.ports.out.ArchivoProcessorPort;
-import analisis.core.model.psd.ArchivoPSD;
-import analisis.core.model.psd.MetadatosPSD;
-import analisis.core.model.psd.EstructuraCapaPSD;
+import ec.edu.uce.certificadorforense.core.ports.out.ArchivoProcessorPort;
+import ec.edu.uce.certificadorforense.core.model.psd.ArchivoPSD;
+import ec.edu.uce.certificadorforense.core.model.psd.MetadatosPSD;
+import ec.edu.uce.certificadorforense.core.model.psd.EstructuraCapaPSD;
 
 import java.io.File;
 import java.util.List;

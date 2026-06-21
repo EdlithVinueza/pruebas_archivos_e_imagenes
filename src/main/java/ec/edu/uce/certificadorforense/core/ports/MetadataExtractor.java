@@ -1,4 +1,4 @@
-package analisis.core.ports;
+package ec.edu.uce.certificadorforense.core.ports;
 
 import com.drew.metadata.Metadata;
 

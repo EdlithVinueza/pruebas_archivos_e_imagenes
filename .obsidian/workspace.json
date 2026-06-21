@@ -1,0 +1,220 @@
+{
+  "main": {
+    "id": "254ae6b1c3416577",
+    "type": "split",
+    "children": [
+      {
+        "id": "fea8b802642427fd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6976a535bbcd8f83",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Nueva pestaña"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7881fe839f5510ae",
+    "type": "split",
+    "children": [
+      {
+        "id": "2f5ea2907c31c7fa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fc373a5e94623a51",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "21ea402460a22efd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "05cb7b47a66ddc10",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 408.5
+  },
+  "right": {
+    "id": "40769f95ebedf641",
+    "type": "split",
+    "children": [
+      {
+        "id": "55e03e1ad9ad9ad8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6c100a7daa2be131",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/fase1_validacion/01_analisis_estructura_y_datos.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes de 01_analisis_estructura_y_datos"
+            }
+          },
+          {
+            "id": "1842515e5a9d28d9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/fase1_validacion/01_analisis_estructura_y_datos.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes de 01_analisis_estructura_y_datos"
+            }
+          },
+          {
+            "id": "117a63839aefdd18",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "9aef51bc3887c24e",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "6e8d3a25992e44f7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/fase1_validacion/01_analisis_estructura_y_datos.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema de 01_analisis_estructura_y_datos"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "6976a535bbcd8f83",
+  "lastOpenFiles": [
+    "README.md",
+    "docs/fase4_certificacion_y_esteganografia/00_resumen_fase_4.md",
+    "docs/fase4_certificacion_y_esteganografia/02_generacion_pdf_y_fusion_eof.md",
+    "docs/fase4_certificacion_y_esteganografia/03_generacion_pdf_minimalista.md",
+    "docs/fase1_validacion/02_patrones_diseno_y_validaciones.md",
+    "docs/fase1_validacion/01_analisis_metadata_y_estructura.md",
+    "docs/fase1_validacion/00_resumen_fase_1.md",
+    "docs/fase1_validacion/03_comparacion_perceptual_phash.md",
+    "docs/conceptos_clave/justificacion.md",
+    "docs/conceptos_clave/01_validez_legal_y_firma_ecuador.md",
+    "docs/fase4_certificacion_y_esteganografia/01_esteganografia_metadata.md",
+    "modulo_b/build/test-results/test/binary/results-generic.bin",
+    "modulo_b/build/test-results/test/binary/in-progress-results-generic6989702653945012067.bin",
+    "modulo_b/build/tmp/compileTestJava/compileTransaction/stash-dir/Paso6_InsercionFinalTest.class.uniqueId2",
+    "modulo_b/build/tmp/compileTestJava/compileTransaction/stash-dir/FlujoEndToEndTest.class.uniqueId1",
+    "modulo_b/build/tmp/compileTestJava/compileTransaction/stash-dir/Paso4_FirmaCriptograficaTest.class.uniqueId0",
+    "modulo_b/build/tmp/compileJava/compileTransaction/stash-dir/AdaptadorEsteganografia.class.uniqueId0",
+    "modulo_b/build/reports/tests/test/org.example.analisis.integracion.FlujoEndToEndTest/testFlujoCompletoDeCertificacion_JPEG().html",
+    "modulo_b/build/reports/tests/test/org.example.analisis.integracion.FlujoEndToEndTest/testFlujoCompletoDeCertificacion_PNG().html",
+    "modulo_b/build/resultados_test/jpeg/Girasol_Certificado_E2E.jpg",
+    "modulo_b/build/resultados_test/jpeg",
+    "modulo_b/build/resultados_test/Certificado_Final_E2E_JPEG.pdf",
+    "modulo_b/build/resultados_test/png/Girasol_Certificado_E2E.png",
+    "docs/fase3_firma_criptografica/00_resumen_fase_3.md",
+    "docs/fase2_recepcion_datos/00_resumen_fase_2.md",
+    "modulo_b/build/resultados_test/Girasol_Certificado_E2E.png",
+    "modulo_b/build/resultados_test/girasol-certificado.png",
+    "modulo_b/build/resultados_test/girasol-certificado.jpg",
+    "modulo_b/build/resultados_test/girasol-certificado-final.png",
+    "justificacion.md",
+    "docs/fase4_certificacion_y_esteganografia/04_implementacion_pdf_minimalista.md",
+    "docs/fase4_certificacion_y_esteganografia/03_plantilla_certificado_pdf.md",
+    "docs/fase1_validacion/01_analisis_estructura_y_datos.md",
+    "docs/arquitecture/01_arquitectura_hexagonal.md",
+    "docs/01_arquitectura_hexagonal.md"
+  ]
+}

@@ -1,4 +1,4 @@
-package analisis.core.model.base;
+package ec.edu.uce.certificadorforense.core.model.base;
 
 import lombok.Getter;
 import lombok.Setter;

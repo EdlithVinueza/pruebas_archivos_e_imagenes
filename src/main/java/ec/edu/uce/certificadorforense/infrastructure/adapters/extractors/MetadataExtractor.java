@@ -1,4 +1,4 @@
-package analisis.adapters.extractors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.extractors;
 
 import com.drew.metadata.Metadata;
 

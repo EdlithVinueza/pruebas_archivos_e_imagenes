@@ -1,6 +1,6 @@
-package analisis.core.rules;
+package ec.edu.uce.certificadorforense.core.rules;
 
-import analisis.core.model.validacion.ResultadoValidacion;
+import ec.edu.uce.certificadorforense.core.model.validacion.ResultadoValidacion;
 
 public interface IReglaValidacion<T> {
     ResultadoValidacion validar(T objeto);

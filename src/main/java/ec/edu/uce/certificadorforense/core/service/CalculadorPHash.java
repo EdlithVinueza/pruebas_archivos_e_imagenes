@@ -1,4 +1,4 @@
-package analisis.core.service;
+package ec.edu.uce.certificadorforense.core.service;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

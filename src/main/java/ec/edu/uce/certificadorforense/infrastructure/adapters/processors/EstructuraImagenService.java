@@ -1,6 +1,6 @@
-package analisis.adapters.processors;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.processors;
 
-import analisis.core.model.imagen.EstructuraImagen;
+import ec.edu.uce.certificadorforense.core.model.imagen.EstructuraImagen;
 
 import java.io.File;
 import java.io.FileInputStream;

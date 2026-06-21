@@ -1,9 +1,9 @@
-package analisis.adapters.extractors.psd;
+package ec.edu.uce.certificadorforense.infrastructure.adapters.extractors.psd;
 
 import com.drew.metadata.Metadata;
 import com.drew.metadata.photoshop.PsdHeaderDirectory;
-import analisis.adapters.extractors.MetadataExtractor;
-import analisis.core.model.psd.MetadatosPSD;
+import ec.edu.uce.certificadorforense.infrastructure.adapters.extractors.MetadataExtractor;
+import ec.edu.uce.certificadorforense.core.model.psd.MetadatosPSD;
 
 public class PsdHeader implements MetadataExtractor<MetadatosPSD.MetadatosPSDBuilder> {
   
