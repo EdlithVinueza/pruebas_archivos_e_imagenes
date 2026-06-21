@@ -1,0 +1,23 @@
+package analisis.adapters.extractors.imagen;
+
+import com.drew.metadata.Metadata;
+import com.drew.metadata.jfif.JfifDirectory;
+import analisis.adapters.extractors.MetadataExtractor;
+import analisis.core.model.imagen.MetadatosImagen;
+
+public class Jfif implements MetadataExtractor<MetadatosImagen.MetadatosImagenBuilder> {
+    @Override
+    public void extraer(Metadata metadata, MetadatosImagen.MetadatosImagenBuilder builder) {
+        JfifDirectory dir = metadata.getFirstDirectoryOfType(JfifDirectory.class);
+
+        if (dir != null) {
+            Integer x = dir.getInteger(JfifDirectory.TAG_RESX);
+            Integer y = dir.getInteger(JfifDirectory.TAG_RESY);
+
+            if (x != null) builder.pixelesPorUnidadX(x.longValue());
+            if (y != null) builder.pixelesPorUnidadY(y.longValue());
+
+            builder.unidadFisica(dir.getDescription(JfifDirectory.TAG_UNITS));
+        }
+    }
+}
